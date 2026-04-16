@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>ড্যাশবোর্ড - Gold Business Manager Preview</title>
+    <link rel="stylesheet" href="assets/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="stylesheet" href="assets/common.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/JewelleryManagement.styles.css" />
+    <link rel="stylesheet" href="assets/css/Index.css" />
+    <script src="assets/lib/jquery/dist/jquery.min.js"></script>
+    <script src="assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/site.js"></script>
+</head>
+<body>
+    <div class="preview-bar">
+        <div class="preview-links">
+            <a class="preview-link active" href="index.html">হোম</a>
+<a class="preview-link" href="customer-index.html">গ্রাহক</a>
+<a class="preview-link" href="customer-create.html">নতুন গ্রাহক</a>
+<a class="preview-link" href="buysell-index.html">ক্রয়</a>
+<a class="preview-link" href="buysell-sell.html">বিক্রয়</a>
+<a class="preview-link" href="sms-index.html">SMS</a>
+<a class="preview-link" href="report-index.html">রিপোর্ট</a>
+<a class="preview-link" href="privacy.html">Privacy</a>
+        </div>
+    </div>
+    <div class="container preview-shell">
+        <main role="main" class="pb-3">
+            <!-- App Bar -->
+            <div class="app-bar">
+                <div class="welcome-section">
+                    <div class="user-greeting">
+                        <h1>স্বাগতম! 👋</h1>
+                        <p>গোল্ড বিজনেস ম্যানেজার</p>
+                    </div>
+                    <div class="gold-rate-card">
+                        <small>আজকের সোনার দর</small>
+                        <div class="rate" id="dashboardGoldRate">৳ 5,950</div>
+                        <div class="unit">/ভরি</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <a href="customer-index.html" style="text-decoration: none; color: inherit;">
+                        <div class="stat-details">
+                            <h3>মোট গ্রাহক</h3>
+                            <div class="value"><span id="dashboardCustomerCount">248</span> <span class="change" id="dashboardCustomerChange">+12</span></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>আজকের বিক্রয়</h3>
+                        <div class="value"><span id="dashboardTodaySales">৳ 0</span> <span class="change" id="dashboardTodaySalesMeta">0 অর্ডার</span></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-weight-hanging"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>স্টক (গ্রাম)</h3>
+                        <div class="value"><span id="dashboardStockWeight">0g</span> <span class="change" id="dashboardStockMeta">0 আইটেম</span></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>মোট লেনদেন</h3>
+                        <div class="value"><span id="dashboardTransactionCount">0</span> <span class="change" id="dashboardTransactionMeta">ক্রয় + বিক্রয়</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Menu Title -->
+            <h2 class="menu-title">
+                <i class="fas fa-th-large" style="margin-right: 10px; color: #b8860b;"></i>
+                মূল মেনু
+            </h2>
+
+            <!-- Main Menu Grid -->
+            <div class="menu-grid">
+                <!-- Add Customer Card -->
+                <a href="customer-index.html" class="menu-card">
+                    <div class="menu-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3>গ্রাহক যোগ</h3>
+                    <p>নতুন গ্রাহক তৈরি</p>
+                </a>
+
+                <!-- Sell Card -->
+                <a href="buysell-sell.html" class="menu-card">
+                    <div class="menu-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>বিক্রয়</h3>
+                    <p>পণ্য বিক্রয় করুন</p>
+                </a>
+
+                <!-- Buy Card -->
+                <a href="buysell-index.html" class="menu-card">
+                    <div class="menu-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>ক্রয়</h3>
+                    <p>পণ্য ক্রয় করুন</p>
+                </a>
+
+                <!-- SMS Card -->
+                <a href="sms-index.html" class="menu-card">
+                    <div class="menu-icon">
+                        <i class="fas fa-sms"></i>
+                    </div>
+                    <h3>SMS পাঠান</h3>
+                    <p>গ্রাহককে বার্তা</p>
+                </a>
+            </div>
+
+            <!-- Recent Customers Section -->
+            <h2 class="menu-title">
+                <i class="fas fa-history" style="margin-right: 10px; color: #b8860b;"></i>
+                সাম্প্রতিক গ্রাহক
+            </h2>
+
+            <div class="recent-customers-card" id="dashboardRecentCustomers">
+                <div class="customer-item">
+                    <div class="customer-info">
+                        <div class="customer-avatar">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                        <div>
+                            <div class="customer-details">সাম্প্রতিক গ্রাহক লোড হচ্ছে</div>
+                            <div class="customer-action">Backend থেকে data আসার অপেক্ষায়</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <div class="quick-actions-title">
+                    <i class="fas fa-bolt"></i>
+                    দ্রুত অ্যাকশন
+                </div>
+                <div class="action-buttons">
+                    <button class="action-btn" data-href="buysell-index.html">
+                        <i class="fas fa-calculator"></i>
+                        দর গণনা
+                    </button>
+                    <button class="action-btn" data-href="report-index.html">
+                        <i class="fas fa-file-invoice"></i>
+                        আজকের রিপোর্ট
+                    </button>
+                    <button class="action-btn" data-href="sms-index.html">
+                        <i class="fas fa-bell"></i>
+                        রিমাইন্ডার
+                    </button>
+                    <button class="action-btn" data-href="customer-create.html">
+                        <i class="fas fa-qrcode"></i>
+                        নতুন গ্রাহক
+                    </button>
+                    <button class="action-btn" data-api-link="/api/reports/overview">
+                        <i class="fas fa-download"></i>
+                        এক্সপোর্ট
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <a href="index.html" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>হোম</span>
+                </a>
+                <a href="report-index.html" class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>রিপোর্ট</span>
+                </a>
+                <a href="report-index.html" class="nav-item">
+                    <i class="fas fa-wallet"></i>
+                    <span>স্টক</span>
+                </a>
+                <a href="privacy.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>সেটিংস</span>
+                </a>
+                <a href="admin-profile.html" class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span>প্রোফাইল</span>
+                </a>
+            </div>
+
+            <script>
+                    // Add active state to menu cards
+                           document.querySelectorAll('.menu-card').forEach(card => {
+                        card.addEventListener('click', function (e) {
+                            e.preventDefault();
+
+                            this.style.transform = 'scale(0.95)';
+
+                            setTimeout(() => {
+                                this.style.transform = 'scale(1)';
+
+                                // 👉 redirect after animation
+                                window.location.href = this.getAttribute('href');
+
+                            }, 200);
+                        });
+                    });
+
+                    // Active navigation handling
+                    document.querySelectorAll('.nav-item').forEach(item => {
+                        item.addEventListener('click', function(e) {
+                            const href = this.getAttribute('href');
+                            document.querySelectorAll('.nav-item').forEach(nav => {
+                                nav.classList.remove('active');
+                            });
+                            this.classList.add('active');
+
+                            if (!href || href === '#') {
+                                e.preventDefault();
+                            }
+                        });
+                    });
+                </script>
+            <script src="assets/js/dashboard.js"></script>
+        </main>
+    </div>
+</body>
+</html>

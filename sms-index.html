@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>SMS - Gold Business Manager Preview</title>
+    <link rel="stylesheet" href="assets/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="stylesheet" href="assets/common.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/JewelleryManagement.styles.css" />
+    <script src="assets/lib/jquery/dist/jquery.min.js"></script>
+    <script src="assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/site.js"></script>
+</head>
+<body>
+    <div class="preview-bar">
+        <div class="preview-links">
+            <a class="preview-link" href="index.html">হোম</a>
+<a class="preview-link" href="customer-index.html">গ্রাহক</a>
+<a class="preview-link" href="customer-create.html">নতুন গ্রাহক</a>
+<a class="preview-link" href="buysell-index.html">ক্রয়</a>
+<a class="preview-link" href="buysell-sell.html">বিক্রয়</a>
+<a class="preview-link active" href="sms-index.html">SMS</a>
+<a class="preview-link" href="report-index.html">রিপোর্ট</a>
+<a class="preview-link" href="privacy.html">Privacy</a>
+        </div>
+    </div>
+    <div class="container preview-shell">
+        <main role="main" class="pb-3">
+            <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+
+                body {
+                    background: #f8f9fa;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                    padding-bottom: 30px;
+                }
+
+                .mobile-container {
+                    max-width: 500px;
+                    margin: 0 auto;
+                    padding: 16px;
+                    background: #f8f9fa;
+                    min-height: 100vh;
+                }
+
+                /* Header */
+                .app-header {
+                    background: white;
+                    border-radius: 24px;
+                    padding: 16px;
+                    margin-bottom: 16px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+
+                .header-title h1 {
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: #1a1a2e;
+                    margin: 0;
+                }
+
+                .header-title p {
+                    font-size: 12px;
+                    color: #e65100;
+                    margin: 4px 0 0 0;
+                }
+
+                .header-icon {
+                    width: 48px;
+                    height: 48px;
+                    background: linear-gradient(135deg, #e65100, #ff9800);
+                    border-radius: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 24px;
+                }
+
+                /* Balance Card */
+                .balance-card {
+                    background: linear-gradient(135deg, #e65100, #ff9800);
+                    border-radius: 24px;
+                    padding: 20px;
+                    margin-bottom: 16px;
+                    color: white;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    box-shadow: 0 4px 12px rgba(230, 81, 0, 0.3);
+                }
+
+                .balance-info h3 {
+                    font-size: 14px;
+                    font-weight: 500;
+                    opacity: 0.9;
+                    margin-bottom: 8px;
+                }
+
+                .balance-amount {
+                    font-size: 28px;
+                    font-weight: 800;
+                }
+
+                .balance-unit {
+                    font-size: 12px;
+                    font-weight: 400;
+                    opacity: 0.8;
+                }
+
+                .balance-icon {
+                    width: 50px;
+                    height: 50px;
+                    background: rgba(255,255,255,0.2);
+                    border-radius: 25px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 24px;
+                }
+
+                /* Top Up Card */
+                .topup-card {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 16px;
+                    margin-bottom: 16px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                }
+
+                .topup-title {
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #1a1a2e;
+                    margin-bottom: 12px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+
+                    .topup-title i {
+                        color: #e65100;
+                    }
+
+                .topup-input-group {
+                    display: flex;
+                    gap: 12px;
+                    margin-bottom: 12px;
+                }
+
+                .topup-input {
+                    flex: 1;
+                    padding: 14px 16px;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 16px;
+                    font-size: 15px;
+                    font-family: inherit;
+                }
+
+                    .topup-input:focus {
+                        outline: none;
+                        border-color: #e65100;
+                        box-shadow: 0 0 0 3px rgba(230, 81, 0, 0.1);
+                    }
+
+                .topup-btn {
+                    padding: 14px 24px;
+                    background: linear-gradient(135deg, #e65100, #ff9800);
+                    border: none;
+                    border-radius: 16px;
+                    color: white;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                }
+
+                    .topup-btn:active {
+                        transform: scale(0.98);
+                    }
+
+                /* Quick Amounts */
+                .quick-amounts {
+                    display: flex;
+                    gap: 10px;
+                    margin-top: 12px;
+                }
+
+                .quick-btn {
+                    flex: 1;
+                    padding: 10px;
+                    background: #f5f5f5;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 30px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #e65100;
+                    cursor: pointer;
+                    text-align: center;
+                    transition: all 0.2s;
+                }
+
+                    .quick-btn:active {
+                        background: #e65100;
+                        color: white;
+                        transform: scale(0.96);
+                    }
+
+                /* Form Card */
+                .form-card {
+                    background: white;
+                    border-radius: 24px;
+                    padding: 20px;
+                    margin-bottom: 16px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                }
+
+                .section-title {
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #1a1a2e;
+                    margin-bottom: 16px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+
+                    .section-title i {
+                        color: #e65100;
+                    }
+
+                /* Customer Selection Row */
+                .customer-row {
+                    display: flex;
+                    gap: 12px;
+                    align-items: center;
+                    margin-bottom: 16px;
+                }
+
+                .customer-select {
+                    flex: 2;
+                    padding: 14px 16px;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 16px;
+                    font-size: 15px;
+                    background: white;
+                    font-family: inherit;
+                    cursor: pointer;
+                }
+
+                    .customer-select:focus {
+                        outline: none;
+                        border-color: #e65100;
+                        box-shadow: 0 0 0 3px rgba(230, 81, 0, 0.1);
+                    }
+
+                .load-customer-btn {
+                    flex: 1;
+                    padding: 14px;
+                    background: #f5f5f5;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 16px;
+                    font-weight: 600;
+                    color: #e65100;
+                    cursor: pointer;
+                    text-align: center;
+                    transition: all 0.2s;
+                }
+
+                    .load-customer-btn:active {
+                        background: #e65100;
+                        color: white;
+                    }
+
+                /* Phone Input */
+                .phone-input-group {
+                    margin-bottom: 16px;
+                }
+
+                .phone-input {
+                    width: 100%;
+                    padding: 14px 16px;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 16px;
+                    font-size: 15px;
+                    font-family: inherit;
+                }
+
+                    .phone-input:focus {
+                        outline: none;
+                        border-color: #e65100;
+                        box-shadow: 0 0 0 3px rgba(230, 81, 0, 0.1);
+                    }
+
+                /* SMS Template Select */
+                .template-select {
+                    width: 100%;
+                    padding: 14px 16px;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 16px;
+                    font-size: 15px;
+                    background: white;
+                    margin-bottom: 16px;
+                    font-family: inherit;
+                    cursor: pointer;
+                }
+
+                    .template-select:focus {
+                        outline: none;
+                        border-color: #e65100;
+                        box-shadow: 0 0 0 3px rgba(230, 81, 0, 0.1);
+                    }
+
+                /* SMS Message Textarea */
+                .message-textarea {
+                    width: 100%;
+                    padding: 14px 16px;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 16px;
+                    font-size: 15px;
+                    font-family: inherit;
+                    resize: none;
+                    min-height: 120px;
+                }
+
+                    .message-textarea:focus {
+                        outline: none;
+                        border-color: #e65100;
+                        box-shadow: 0 0 0 3px rgba(230, 81, 0, 0.1);
+                    }
+
+                /* Character Counter */
+                .char-counter {
+                    text-align: right;
+                    font-size: 12px;
+                    color: #999;
+                    margin-top: 8px;
+                }
+
+                    .char-counter.warning {
+                        color: #ff9800;
+                    }
+
+                    .char-counter.danger {
+                        color: #dc3545;
+                    }
+
+                /* SMS Info */
+                .sms-info {
+                    background: #f8f9fa;
+                    border-radius: 16px;
+                    padding: 12px;
+                    margin-top: 16px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                .sms-count {
+                    font-size: 13px;
+                    color: #666;
+                }
+
+                    .sms-count span {
+                        font-weight: 700;
+                        color: #e65100;
+                        font-size: 18px;
+                    }
+
+                .send-btn {
+                    padding: 12px 24px;
+                    background: linear-gradient(135deg, #e65100, #ff9800);
+                    border: none;
+                    border-radius: 30px;
+                    color: white;
+                    font-weight: 600;
+                    font-size: 16px;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+
+                    .send-btn:active {
+                        transform: scale(0.98);
+                    }
+
+                    .send-btn:disabled {
+                        opacity: 0.5;
+                        transform: none;
+                        cursor: not-allowed;
+                    }
+
+                /* Recent Messages */
+                .recent-card {
+                    background: white;
+                    border-radius: 24px;
+                    padding: 20px;
+                    margin-bottom: 16px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                }
+
+                .recent-item {
+                    background: #f8f9fa;
+                    border-radius: 16px;
+                    padding: 14px;
+                    margin-bottom: 12px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                .recent-info {
+                    flex: 1;
+                }
+
+                .recent-phone {
+                    font-weight: 600;
+                    color: #1a1a2e;
+                    font-size: 14px;
+                    margin-bottom: 4px;
+                }
+
+                .recent-message {
+                    font-size: 11px;
+                    color: #666;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 200px;
+                }
+
+                .recent-time {
+                    font-size: 10px;
+                    color: #999;
+                    margin-top: 4px;
+                }
+
+                .recent-status {
+                    font-size: 12px;
+                    font-weight: 600;
+                    padding: 4px 10px;
+                    border-radius: 20px;
+                    background: #e8f5e9;
+                    color: #2e7d32;
+                }
+
+                    .recent-status.failed {
+                        background: #ffebee;
+                        color: #c62828;
+                    }
+
+                    .recent-status.pending {
+                        background: #fff3e0;
+                        color: #e65100;
+                    }
+
+                .empty-state {
+                    text-align: center;
+                    padding: 40px 20px;
+                    color: #999;
+                }
+
+                    .empty-state i {
+                        font-size: 48px;
+                        margin-bottom: 12px;
+                        opacity: 0.5;
+                    }
+
+                /* Modal */
+                .modal-custom {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0,0,0,0.5);
+                    z-index: 1000;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 20px;
+                }
+
+                .modal-content-custom {
+                    background: white;
+                    border-radius: 32px;
+                    max-width: 320px;
+                    width: 100%;
+                    text-align: center;
+                    padding: 24px;
+                    animation: modalIn 0.3s ease;
+                }
+
+                @keyframes modalIn {
+                    from {
+                        transform: scale(0.9);
+                        opacity: 0;
+                    }
+
+                    to {
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+                }
+
+                .modal-icon {
+                    width: 64px;
+                    height: 64px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0 auto 16px;
+                    font-size: 32px;
+                }
+
+                    .modal-icon.success {
+                        background: #d4edda;
+                        color: #28a745;
+                    }
+
+                    .modal-icon.error {
+                        background: #ffebee;
+                        color: #dc3545;
+                    }
+
+                    .modal-icon.warning {
+                        background: #fff3e0;
+                        color: #ff9800;
+                    }
+
+                .modal-title-custom {
+                    font-size: 20px;
+                    font-weight: 700;
+                    margin-bottom: 8px;
+                }
+
+                .modal-text {
+                    color: #666;
+                    margin-bottom: 20px;
+                }
+
+                .modal-btn {
+                    width: 100%;
+                    padding: 14px;
+                    background: linear-gradient(135deg, #e65100, #ff9800);
+                    border: none;
+                    border-radius: 30px;
+                    color: white;
+                    font-weight: 600;
+                    cursor: pointer;
+                }
+
+                /* Toast Notification */
+                .toast-notification {
+                    position: fixed;
+                    bottom: 20px;
+                    left: 20px;
+                    right: 20px;
+                    background: #1a1a2e;
+                    color: white;
+                    padding: 14px 20px;
+                    border-radius: 30px;
+                    text-align: center;
+                    font-size: 14px;
+                    z-index: 1100;
+                    animation: slideUp 0.3s ease;
+                }
+
+                @keyframes slideUp {
+                    from {
+                        transform: translateY(100px);
+                        opacity: 0;
+                    }
+
+                    to {
+                        transform: translateY(0);
+                        opacity: 1;
+                    }
+                }
+
+                .toast-notification.success {
+                    background: #28a745;
+                }
+
+                .toast-notification.error {
+                    background: #dc3545;
+                }
+
+                .toast-notification.warning {
+                    background: #ff9800;
+                }
+            </style>
+
+            <div class="mobile-container">
+                <!-- Header -->
+                <div class="app-header">
+                    <div class="header-title">
+                        <h1>SMS</h1>
+                        <p>পাঠান & নোটিফিকেশন</p>
+                    </div>
+                    <div class="header-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                </div>
+
+                <!-- Balance Card -->
+                <div class="balance-card">
+                    <div class="balance-info">
+                        <h3><i class="fas fa-coins"></i> এসএমএস ব্যালেন্স</h3>
+                        <div class="balance-amount">1,250 <span class="balance-unit">SMS</span></div>
+                    </div>
+                    <div class="balance-icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                </div>
+
+                <!-- Top Up Card -->
+                <div class="topup-card">
+                    <div class="topup-title">
+                        <i class="fas fa-plus-circle"></i>
+                        এসএমএস প্যাকেজ কিনুন
+                    </div>
+                    <div class="topup-input-group">
+                        <input type="number" class="topup-input" id="smsAmount" placeholder="এসএমএস সংখ্যা" value="100">
+                        <button class="topup-btn" onclick="topUpSMS()">কিনুন</button>
+                    </div>
+                    <div class="quick-amounts">
+                        <div class="quick-btn" onclick="setSMSAmount(50)">50 SMS</div>
+                        <div class="quick-btn" onclick="setSMSAmount(100)">100 SMS</div>
+                        <div class="quick-btn" onclick="setSMSAmount(500)">500 SMS</div>
+                        <div class="quick-btn" onclick="setSMSAmount(1000)">1000 SMS</div>
+                    </div>
+                </div>
+
+                <!-- Send SMS Form -->
+                <div class="form-card">
+                    <div class="section-title">
+                        <i class="fas fa-paper-plane"></i>
+                        এসএমএস পাঠান
+                    </div>
+
+                    <!-- Customer Selection -->
+                    <div class="customer-row">
+                        <select class="customer-select" id="customerSelect" onchange="loadCustomerPhone()">
+                            <option value="">-- গ্রাহক নির্বাচন করুন --</option>
+                        </select>
+                        <div class="load-customer-btn" onclick="loadCustomerPhone()">
+                            <i class="fas fa-sync-alt"></i> লোড
+                        </div>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="phone-input-group">
+                        <input type="tel" class="phone-input" id="phoneNumber" placeholder="মোবাইল নম্বর (01XXXXXXXXX)">
+                    </div>
+
+                    <!-- SMS Template -->
+                    <select class="template-select" id="templateSelect" onchange="loadTemplate()">
+                        <option value="">-- টেমপ্লেট নির্বাচন করুন --</option>
+                        <option value="welcome">স্বাগতম এসএমএস</option>
+                        <option value="purchase">ক্রয় নিশ্চিতকরণ</option>
+                        <option value="sell">বিক্রয় নিশ্চিতকরণ</option>
+                        <option value="offer">অফার ও প্রচারণা</option>
+                        <option value="reminder">পেমেন্ট রিমাইন্ডার</option>
+                        <option value="festival">শুভেচ্ছা বার্তা</option>
+                    </select>
+
+                    <!-- SMS Message -->
+                    <textarea class="message-textarea" id="smsMessage" placeholder="আপনার এসএমএস বার্তা লিখুন...&#10;&#10;উদাহরণ: প্রিয় গ্রাহক, আপনার অর্ডারটি প্রক্রিয়াকৃত হয়েছে। ধন্যবাদ।" oninput="updateCharacterCount()"></textarea>
+
+                    <!-- Character Counter -->
+                    <div class="char-counter" id="charCounter">0 / 160 অক্ষর</div>
+
+                    <!-- SMS Info -->
+                    <div class="sms-info">
+                        <div class="sms-count">
+                            <i class="fas fa-envelope-open-text"></i> মোট এসএমএস: <span id="smsCount">0</span>
+                        </div>
+                        <button class="send-btn" id="sendBtn" onclick="sendSMS()">
+                            <i class="fas fa-paper-plane"></i> পাঠান
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Messages -->
+                <div class="recent-card">
+                    <div class="section-title">
+                        <i class="fas fa-history"></i>
+                        সম্প্রতি পাঠানো
+                    </div>
+                    <div id="recentContainer">
+                        <div class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <p>কোনো এসএমএস পাঠানো হয়নি</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal-custom" id="resultModal">
+                <div class="modal-content-custom">
+                    <div class="modal-icon" id="modalIcon"></div>
+                    <div class="modal-title-custom" id="modalTitle"></div>
+                    <div class="modal-text" id="modalText"></div>
+                    <button class="modal-btn" onclick="closeModal()">ঠিক আছে</button>
+                </div>
+            </div>
+            <script src="assets/js/sms-page.js"></script>
+        </main>
+    </div>
+</body>
+</html>

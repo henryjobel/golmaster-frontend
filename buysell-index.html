@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>ক্রয় - Gold Business Manager Preview</title>
+    <link rel="stylesheet" href="assets/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="stylesheet" href="assets/common.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/JewelleryManagement.styles.css" />
+    <script src="assets/lib/jquery/dist/jquery.min.js"></script>
+    <script src="assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/site.js"></script>
+</head>
+<body data-trade-type="purchase">
+    <div class="preview-bar">
+        <div class="preview-links">
+            <a class="preview-link" href="index.html">হোম</a>
+<a class="preview-link" href="customer-index.html">গ্রাহক</a>
+<a class="preview-link" href="customer-create.html">নতুন গ্রাহক</a>
+<a class="preview-link active" href="buysell-index.html">ক্রয়</a>
+<a class="preview-link" href="buysell-sell.html">বিক্রয়</a>
+<a class="preview-link" href="sms-index.html">SMS</a>
+<a class="preview-link" href="report-index.html">রিপোর্ট</a>
+<a class="preview-link" href="privacy.html">Privacy</a>
+        </div>
+    </div>
+    <div class="container preview-shell">
+        <main role="main" class="pb-3">
+            <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+
+                body {
+                    background: #f8f9fa;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                    padding-bottom: 30px;
+                }
+
+                .mobile-container {
+                    max-width: 500px;
+                    margin: 0 auto;
+                    padding: 16px;
+                    background: #f8f9fa;
+                    min-height: 100vh;
+                }
+
+                /* Header */
+                .app-header {
+                    background: white;
+                    border-radius: 24px;
+                    padding: 16px;
+                    margin-bottom: 16px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+
+                .header-title h1 {
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: #1a1a2e;
+                    margin: 0;
+                }
+
+                .header-title p {
+                    font-size: 12px;
+                    color: #b8860b;
+                    margin: 4px 0 0 0;
+                }
+
+                .header-icon {
+                    width: 48px;
+                    height: 48px;
+                    background: linear-gradient(135deg, #b8860b, #daa520);
+                    border-radius: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 24px;
+                }
+
+                /* Gold Rate Card */
+                .gold-rate-card {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 16px;
+                    margin-bottom: 16px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                }
+
+                .rate-title {
+                    font-size: 14px;
+                    color: #666;
+                    margin-bottom: 12px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+
+                    .rate-title i {
+                        color: #b8860b;
+                    }
+
+                .rate-grid {
+                    display: grid;
+                    grid-template-columns: repeat(5, 1fr);
+                    gap: 8px;
+                    margin-top: 8px;
+                    max-height: 300px;
+                    overflow-y: auto;
+                }
+
+                .rate-item {
+                    text-align: center;
+                    padding: 10px 6px;
+                    background: #f8f9fa;
+                    border-radius: 14px;
+                    transition: all 0.2s;
+                    cursor: pointer;
+                    border: 1px solid #eee;
+                }
+
+                    .rate-item.active {
+                        background: linear-gradient(135deg, #b8860b, #daa520);
+                        border-color: transparent;
+                    }
+
+                        .rate-item.active .rate-karat,
+                        .rate-item.active .rate-value input {
+                            color: white;
+                            background: transparent;
+                            border-color: white;
+                        }
+
+                .rate-karat {
+                    font-size: 12px;
+                    font-weight: 600;
+                    color: #1a1a2e;
+                    margin-bottom: 6px;
+                }
+
+                .rate-value {
+                    font-size: 12px;
+                    font-weight: 700;
+                    margin-top: 4px;
+                }
+
+                    .rate-value input {
+                        width: 100%;
+                        padding: 6px 4px;
+                        border: 1px solid #e0e0e0;
+                        border-radius: 10px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        text-align: center;
+                        background: white;
+                        color: #b8860b;
+                        font-family: inherit;
+                    }
+
+                        .rate-value input:focus {
+                            outline: none;
+                            border-color: #b8860b;
+                            box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.1);
+                        }
+
+                /* Form Card */
+                .form-card {
+                    background: white;
+                    border-radius: 24px;
+                    padding: 20px;
+                    margin-bottom: 16px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                }
+
+                .section-title {
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #1a1a2e;
+                    margin-bottom: 16px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+
+                    .section-title i {
+                        color: #b8860b;
+                    }
+
+                /* Select Dropdown */
+                .custom-select {
+                    width: 100%;
+                    padding: 14px 16px;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 16px;
+                    font-size: 15px;
+                    background: white;
+                    margin-bottom: 16px;
+                    font-family: inherit;
+                    transition: all 0.2s;
+                    cursor: pointer;
+                }
+
+                    .custom-select:focus {
+                        outline: none;
+                        border-color: #b8860b;
+                        box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+                    }
+
+                /* Input Group */
+                .input-group {
+                    margin-bottom: 16px;
+                }
+
+                .input-label {
+                    font-size: 13px;
+                    color: #666;
+                    margin-bottom: 8px;
+                    display: block;
+                    font-weight: 500;
+                }
+
+                .input-field {
+                    width: 100%;
+                    padding: 14px 16px;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 16px;
+                    font-size: 15px;
+                    transition: all 0.2s;
+                }
+
+                    .input-field:focus {
+                        outline: none;
+                        border-color: #b8860b;
+                        box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+                    }
+
+                /* Weight Calculator - New Design */
+                .weight-calculator {
+                    background: linear-gradient(135deg, #fff9f0, #fff5e8);
+                    border-radius: 24px;
+                    padding: 20px;
+                    margin-bottom: 20px;
+                    border: 1px solid #ffe0b3;
+                }
+
+                .calc-title {
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #1a1a2e;
+                    margin-bottom: 20px;
+                    text-align: center;
+                    background: linear-gradient(135deg, #b8860b, #daa520);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                    display: inline-block;
+                    width: 100%;
+                }
+
+                /* 4-Column Weight Grid - New Design */
+                .weight-grid {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 12px;
+                    margin-bottom: 20px;
+                }
+
+                .weight-item {
+                    text-align: center;
+                    background: white;
+                    border-radius: 20px;
+                    padding: 12px 8px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                    transition: all 0.2s;
+                    border: 1px solid #f0e0c0;
+                }
+
+                    .weight-item:focus-within {
+                        border-color: #b8860b;
+                        box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+                    }
+
+                .weight-label {
+                    font-size: 14px;
+                    font-weight: 700;
+                    color: #b8860b;
+                    display: block;
+                    margin-bottom: 8px;
+                }
+
+                    .weight-label small {
+                        font-size: 10px;
+                        font-weight: 400;
+                        color: #999;
+                        display: block;
+                        margin-top: 2px;
+                    }
+
+                .weight-input {
+                    width: 100%;
+                    text-align: center;
+                    border: none;
+                    padding: 10px 0;
+                    font-size: 18px;
+                    font-weight: 700;
+                    background: transparent;
+                    color: #1a1a2e;
+                    font-family: inherit;
+                }
+
+                    .weight-input:focus {
+                        outline: none;
+                        color: #b8860b;
+                    }
+
+                    .weight-input[type="number"] {
+                        -moz-appearance: textfield;
+                    }
+
+                        .weight-input[type="number"]::-webkit-inner-spin-button,
+                        .weight-input[type="number"]::-webkit-outer-spin-button {
+                            opacity: 0.5;
+                        }
+
+                .total-weight {
+                    margin-top: 16px;
+                    padding: 14px;
+                    background: linear-gradient(135deg, #b8860b, #daa520);
+                    border-radius: 20px;
+                    text-align: center;
+                    color: white;
+                    font-weight: 600;
+                    font-size: 14px;
+                }
+
+                .info-text {
+                    font-size: 11px;
+                    color: #b8860b;
+                    text-align: center;
+                    margin-top: 12px;
+                    background: rgba(184, 134, 11, 0.1);
+                    padding: 8px;
+                    border-radius: 16px;
+                }
+
+                /* Rate Display Cards */
+                .rate-cards {
+                    display: flex;
+                    gap: 12px;
+                    margin-bottom: 16px;
+                }
+
+                .rate-card {
+                    flex: 1;
+                    background: linear-gradient(135deg, #fff8f0, #fff4e6);
+                    border-radius: 16px;
+                    padding: 12px 8px;
+                    text-align: center;
+                    border: 1px solid #ffe0b3;
+                }
+
+                .rate-card-title {
+                    font-size: 11px;
+                    color: #b8860b;
+                    font-weight: 500;
+                    margin-bottom: 6px;
+                }
+
+                .rate-card-value {
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: #b8860b;
+                }
+
+                .rate-card-sub {
+                    font-size: 10px;
+                    color: #999;
+                    margin-top: 4px;
+                }
+
+                /* Editable Rate */
+                .editable-rate {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    background: #f8f9fa;
+                    border-radius: 16px;
+                    padding: 8px 16px;
+                }
+
+                    .editable-rate span {
+                        color: #b8860b;
+                        font-weight: 600;
+                        font-size: 18px;
+                    }
+
+                    .editable-rate input {
+                        flex: 1;
+                        padding: 10px;
+                        border: 1px solid #e0e0e0;
+                        border-radius: 14px;
+                        font-size: 18px;
+                        font-weight: 700;
+                        text-align: right;
+                        background: white;
+                        color: #1a1a2e;
+                    }
+
+                    .editable-rate .rate-unit {
+                        color: #666;
+                        font-size: 14px;
+                        min-width: 45px;
+                    }
+
+                /* Add Button */
+                .add-btn {
+                    width: 100%;
+                    padding: 16px;
+                    background: linear-gradient(135deg, #b8860b, #daa520);
+                    border: none;
+                    border-radius: 30px;
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                }
+
+                    .add-btn:active {
+                        transform: scale(0.98);
+                    }
+
+                /* Items List */
+                .items-list {
+                    background: white;
+                    border-radius: 24px;
+                    padding: 20px;
+                    margin-bottom: 16px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                }
+
+                .item-card {
+                    background: #f8f9fa;
+                    border-radius: 16px;
+                    padding: 14px;
+                    margin-bottom: 12px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                .item-info {
+                    flex: 1;
+                }
+
+                .item-name {
+                    font-weight: 600;
+                    color: #1a1a2e;
+                    margin-bottom: 6px;
+                    font-size: 14px;
+                }
+
+                .item-details {
+                    font-size: 11px;
+                    color: #666;
+                }
+
+                .item-price {
+                    text-align: right;
+                }
+
+                .item-amount {
+                    font-weight: 700;
+                    color: #b8860b;
+                    font-size: 16px;
+                }
+
+                .item-weight {
+                    font-size: 10px;
+                    color: #999;
+                    margin-top: 4px;
+                }
+
+                .delete-item {
+                    width: 36px;
+                    height: 36px;
+                    background: #fee;
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #dc3545;
+                    cursor: pointer;
+                    margin-left: 12px;
+                }
+
+                .empty-state {
+                    text-align: center;
+                    padding: 40px 20px;
+                    color: #999;
+                }
+
+                    .empty-state i {
+                        font-size: 48px;
+                        margin-bottom: 12px;
+                        opacity: 0.5;
+                    }
+
+                /* Footer Summary */
+                .footer-summary {
+                    background: white;
+                    border-radius: 24px;
+                    padding: 20px;
+                    margin-bottom: 16px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                    position: sticky;
+                    bottom: 0;
+                }
+
+                .summary-row {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 12px;
+                }
+
+                .summary-label {
+                    color: #666;
+                    font-size: 14px;
+                }
+
+                .summary-value {
+                    font-weight: 700;
+                    color: #1a1a2e;
+                    font-size: 14px;
+                }
+
+                .grand-total {
+                    border-top: 2px solid #f0f0f0;
+                    padding-top: 12px;
+                    margin-top: 8px;
+                }
+
+                    .grand-total .summary-label {
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: #1a1a2e;
+                    }
+
+                    .grand-total .summary-value {
+                        font-size: 20px;
+                        color: #b8860b;
+                    }
+
+                .action-buttons {
+                    display: flex;
+                    gap: 12px;
+                    margin-top: 16px;
+                }
+
+                .btn-clear {
+                    flex: 1;
+                    padding: 14px;
+                    background: #f0f0f0;
+                    border: none;
+                    border-radius: 30px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #666;
+                    cursor: pointer;
+                }
+
+                .btn-save {
+                    flex: 2;
+                    padding: 14px;
+                    background: linear-gradient(135deg, #b8860b, #daa520);
+                    border: none;
+                    border-radius: 30px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: white;
+                    cursor: pointer;
+                }
+
+                /* Modal */
+                .modal-custom {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0,0,0,0.5);
+                    z-index: 1000;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 20px;
+                }
+
+                .modal-content-custom {
+                    background: white;
+                    border-radius: 32px;
+                    max-width: 320px;
+                    width: 100%;
+                    text-align: center;
+                    padding: 24px;
+                    animation: modalIn 0.3s ease;
+                }
+
+                @keyframes modalIn {
+                    from {
+                        transform: scale(0.9);
+                        opacity: 0;
+                    }
+
+                    to {
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+                }
+
+                .modal-icon {
+                    width: 64px;
+                    height: 64px;
+                    background: #d4edda;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0 auto 16px;
+                    color: #28a745;
+                    font-size: 32px;
+                }
+
+                .modal-title-custom {
+                    font-size: 20px;
+                    font-weight: 700;
+                    margin-bottom: 8px;
+                }
+
+                .modal-text {
+                    color: #666;
+                    margin-bottom: 20px;
+                }
+
+                .modal-details {
+                    background: #f8f9fa;
+                    border-radius: 16px;
+                    padding: 12px;
+                    margin: 16px 0;
+                    text-align: left;
+                }
+
+                .modal-btn {
+                    width: 100%;
+                    padding: 14px;
+                    background: linear-gradient(135deg, #b8860b, #daa520);
+                    border: none;
+                    border-radius: 30px;
+                    color: white;
+                    font-weight: 600;
+                    cursor: pointer;
+                }
+
+                /* Toast Notification */
+                .toast-notification {
+                    position: fixed;
+                    bottom: 20px;
+                    left: 20px;
+                    right: 20px;
+                    background: #1a1a2e;
+                    color: white;
+                    padding: 14px 20px;
+                    border-radius: 30px;
+                    text-align: center;
+                    font-size: 14px;
+                    z-index: 1100;
+                    animation: slideUp 0.3s ease;
+                }
+
+                @keyframes slideUp {
+                    from {
+                        transform: translateY(100px);
+                        opacity: 0;
+                    }
+
+                    to {
+                        transform: translateY(0);
+                        opacity: 1;
+                    }
+                }
+
+                .toast-notification.success {
+                    background: #28a745;
+                }
+
+                .toast-notification.error {
+                    background: #dc3545;
+                }
+            </style>
+
+            <div class="mobile-container">
+                <!-- Header -->
+                <div class="app-header">
+                    <div class="header-title">
+                        <h1>ক্রয়</h1>
+                        <p>সোনা ক্রয় করুন</p>
+                    </div>
+                    <div class="header-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </div>
+
+                <!-- Gold Rate - Fully Editable -->
+                <div class="gold-rate-card">
+                    <div class="rate-title">
+                        <i class="fas fa-edit"></i>
+                        আজকের সোনার দর (প্রতি ভরি) - নিজে বসান
+                    </div>
+                    <div class="rate-grid" id="rateGrid">
+                        <!-- Editable rates will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Customer Selection -->
+                <div class="form-card">
+                    <div class="section-title">
+                        <i class="fas fa-user"></i>
+                        গ্রাহক নির্বাচন
+                    </div>
+                    <select class="custom-select" id="customerSelect">
+                        <option value="">-- গ্রাহক নির্বাচন করুন --</option>
+                    </select>
+                </div>
+
+                <!-- Item Form -->
+                <div class="form-card">
+                    <div class="section-title">
+                        <i class="fas fa-gem"></i>
+                        আইটেম তথ্য
+                    </div>
+
+                    <!-- Item Name with Dropdown -->
+                    <div class="input-group">
+                        <label class="input-label">আইটেমের নাম</label>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <select class="custom-select" id="itemNameSelect" style="flex: 2; margin-bottom: 0;" onchange="selectItemName()">
+                                <option value="">-- নির্বাচন করুন --</option>
+                                <option value="IC">IC</option>
+                                <option value="Dubai">Dubai</option>
+                                <option value="Bangla">Bangla</option>
+                                <option value="সোনার চেইন">সোনার চেইন</option>
+                                <option value="সোনার আংটি">সোনার আংটি</option>
+                                <option value="সোনার নেকলেস">সোনার নেকলেস</option>
+                                <option value="সোনার কানের দুল">সোনার কানের দুল</option>
+                                <option value="সোনার ব্রেসলেট">সোনার ব্রেসলেট</option>
+                                <option value="সোনার মালা">সোনার মালা</option>
+                            </select>
+                            <input type="text" class="input-field" id="itemName" placeholder="অথবা নিজে লিখুন" style="flex: 1; margin-bottom: 0;">
+                        </div>
+                    </div>
+
+                    <!-- Karat Selection -->
+                    <div class="input-group">
+                        <label class="input-label">কারেট</label>
+                        <select class="custom-select" id="karatSelect">
+                            <option value="24K">24K</option>
+                            <option value="22K" selected>22K</option>
+                            <option value="21K">21K</option>
+                            <option value="20K">20K</option>
+                            <option value="19K">19K</option>
+                            <option value="18K">18K</option>
+                            <option value="17K">17K</option>
+                            <option value="16K">16K</option>
+                            <option value="15K">15K</option>
+                            <option value="14K">14K</option>
+                        </select>
+                    </div>
+
+                    <!-- Weight Calculator - New Design with ভরি, আনা, রতি, পয়েন্ট -->
+                    <div class="weight-calculator">
+                        <div class="calc-title">
+                            <i class="fas fa-weight-hanging"></i> ওজন নির্ধারণ করুন
+                        </div>
+                        <div class="weight-grid">
+                            <div class="weight-item">
+                                <label class="weight-label">ভরি <small>Vori</small></label>
+                                <input type="number" step="any" class="weight-input" id="voriInput" value="0" oninput="syncWeightFromVori()">
+                            </div>
+                            <div class="weight-item">
+                                <label class="weight-label">আনা <small>Ana</small></label>
+                                <input type="number" step="any" class="weight-input" id="anaInput" value="0" oninput="syncWeightFromAna()">
+                            </div>
+                            <div class="weight-item">
+                                <label class="weight-label">রতি <small>Roti</small></label>
+                                <input type="number" step="any" class="weight-input" id="ratiInput" value="0" oninput="syncWeightFromRati()">
+                            </div>
+                            <div class="weight-item">
+                                <label class="weight-label">পয়েন্ট <small>Point</small></label>
+                                <input type="number" step="any" class="weight-input" id="pointInput" value="0" oninput="syncWeightFromPoint()">
+                            </div>
+                        </div>
+                        <div class="total-weight" id="gramDisplay">
+                            <i class="fas fa-chart-line"></i> = 0.000 গ্রাম (0.0000 ভরি)
+                        </div>
+                        <div class="info-text">
+                            <i class="fas fa-info-circle"></i> 1 ভরি = 16 আনা | 1 আনা = 6 রতি | 1 রতি = 6 পয়েন্ট
+                        </div>
+                    </div>
+
+                    <!-- দরের বিবরণ - Rate Details (Per Vori, Per Ana, Per Rati, Per Point) -->
+                    <div class="rate-cards">
+                        <div class="rate-card">
+                            <div class="rate-card-title">প্রতি ভরি</div>
+                            <div class="rate-card-value" id="perVoriDisplay">৳ 5,850</div>
+                            <div class="rate-card-sub">(11.664 গ্রাম)</div>
+                        </div>
+                        <div class="rate-card">
+                            <div class="rate-card-title">প্রতি আনা</div>
+                            <div class="rate-card-value" id="perAnaDisplay">৳ 365.63</div>
+                            <div class="rate-card-sub">(0.729 গ্রাম)</div>
+                        </div>
+                        <div class="rate-card">
+                            <div class="rate-card-title">প্রতি রতি</div>
+                            <div class="rate-card-value" id="perRatiDisplay">৳ 60.94</div>
+                            <div class="rate-card-sub">(0.1215 গ্রাম)</div>
+                        </div>
+                        <div class="rate-card">
+                            <div class="rate-card-title">প্রতি পয়োতি</div>
+                            <div class="rate-card-value" id="perPointDisplay">৳ 10.16</div>
+                            <div class="rate-card-sub">(0.02025 গ্রাম)</div>
+                        </div>
+                    </div>
+
+                    <!-- দর পরিবর্তন - Edit Rate -->
+                    <div class="input-group">
+                        <label class="input-label">দর পরিবর্তন করুন (প্রতি ভরি)</label>
+                        <div class="editable-rate">
+                            <span>৳</span>
+                            <input type="number" id="voriRateInput" step="1" value="5850" oninput="updateRateFromInput()">
+                            <span class="rate-unit">/ভরি</span>
+                        </div>
+                    </div>
+
+                    <!-- Total Price -->
+                    <div class="input-group">
+                        <label class="input-label">এই আইটেমের মূল্য</label>
+                        <div class="calc-input-group" style="background: linear-gradient(135deg, #fff4e0, #fff9f0); border-radius: 16px; padding: 14px 16px;">
+                            <span style="color: #b8860b; font-weight: 600;">৳</span>
+                            <span id="itemTotalDisplay" style="font-size: 22px; font-weight: 800; color: #b8860b;">0</span>
+                        </div>
+                        <input type="hidden" id="itemTotal">
+                        <input type="hidden" id="totalVoriHidden" value="0">
+                    </div>
+
+                    <button class="add-btn" onclick="addItem()">
+                        <i class="fas fa-plus-circle"></i>
+                        আইটেম যোগ করুন
+                    </button>
+                </div>
+
+                <!-- Items List -->
+                <div class="items-list">
+                    <div class="section-title">
+                        <i class="fas fa-list"></i>
+                        যোগকৃত আইটেম
+                    </div>
+                    <div id="itemsContainer">
+                        <div class="empty-state">
+                            <i class="fas fa-box-open"></i>
+                            <p>কোনো আইটেম যোগ করা হয়নি</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Summary -->
+                <div class="footer-summary">
+                    <div class="summary-row">
+                        <span class="summary-label">মোট আইটেম</span>
+                        <span class="summary-value" id="totalItems">0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">মোট ওজন</span>
+                        <span class="summary-value" id="totalWeight">0.000 গ্রাম</span>
+                    </div>
+                    <div class="summary-row grand-total">
+                        <span class="summary-label">মোট মূল্য</span>
+                        <span class="summary-value" id="grandTotal">৳ 0</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn-clear" onclick="clearAll()">
+                            <i class="fas fa-trash-alt"></i> ক্লিয়ার
+                        </button>
+                        <button class="btn-save" onclick="savePurchase()">
+                            <i class="fas fa-save"></i> ক্রয় সম্পন্ন
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Modal -->
+            <div class="modal-custom" id="successModal">
+                <div class="modal-content-custom">
+                    <div class="modal-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="modal-title-custom">ক্রয় সম্পন্ন!</div>
+                    <div class="modal-text">ক্রয় সফলভাবে সম্পন্ন হয়েছে</div>
+                    <div class="modal-details" id="modalDetails"></div>
+                    <button class="modal-btn" onclick="closeModal()">ঠিক আছে</button>
+                </div>
+            </div>
+            <script src="assets/js/trade-page.js"></script>
+        </main>
+    </div>
+</body>
+</html>

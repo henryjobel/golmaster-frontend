@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>Admin Profile - Gold Business Manager</title>
+    <link rel="stylesheet" href="assets/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="stylesheet" href="assets/common.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/JewelleryManagement.styles.css" />
+    <script src="assets/lib/jquery/dist/jquery.min.js"></script>
+    <script src="assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/site.js"></script>
+</head>
+<body>
+    <div class="preview-bar">
+        <div class="preview-links">
+            <a class="preview-link" href="index.html">হোম</a>
+            <a class="preview-link" href="customer-index.html">গ্রাহক</a>
+            <a class="preview-link" href="customer-create.html">নতুন গ্রাহক</a>
+            <a class="preview-link" href="buysell-index.html">ক্রয়</a>
+            <a class="preview-link" href="buysell-sell.html">বিক্রয়</a>
+            <a class="preview-link" href="sms-index.html">SMS</a>
+            <a class="preview-link" href="report-index.html">রিপোর্ট</a>
+            <a class="preview-link" href="privacy.html">Privacy</a>
+            <a class="preview-link active" href="admin-profile.html">প্রোফাইল</a>
+        </div>
+    </div>
+    <div class="container preview-shell">
+        <main role="main" class="pb-3">
+            <style>
+                .profile-shell {
+                    display: grid;
+                    grid-template-columns: minmax(0, 1.15fr) 360px;
+                    gap: 22px;
+                }
+
+                .profile-card,
+                .profile-side-card {
+                    background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 249, 234, 0.94));
+                    border-radius: 30px;
+                    border: 1px solid rgba(218, 165, 32, 0.15);
+                    box-shadow: 0 24px 48px rgba(110, 82, 24, 0.11);
+                }
+
+                .profile-card {
+                    padding: 28px;
+                }
+
+                .profile-section {
+                    margin-top: 24px;
+                    padding-top: 24px;
+                    border-top: 1px solid rgba(218, 165, 32, 0.14);
+                }
+
+                .section-title {
+                    margin: 0 0 8px;
+                    color: #3f2f11;
+                    font-size: 1.28rem;
+                    font-weight: 800;
+                }
+
+                .section-copy {
+                    margin: 0 0 18px;
+                    color: #7a6640;
+                    line-height: 1.6;
+                }
+
+                .profile-hero {
+                    display: flex;
+                    align-items: center;
+                    gap: 18px;
+                    margin-bottom: 24px;
+                }
+
+                .profile-avatar {
+                    width: 86px;
+                    height: 86px;
+                    border-radius: 28px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: linear-gradient(145deg, #9a6f10, #dfb34a);
+                    color: white;
+                    font-size: 2rem;
+                    box-shadow: 0 20px 34px rgba(184, 134, 11, 0.24);
+                }
+
+                .profile-eyebrow {
+                    display: inline-block;
+                    margin-bottom: 8px;
+                    color: #aa7a0b;
+                    font-size: 0.78rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.14em;
+                    font-weight: 700;
+                }
+
+                .profile-title {
+                    margin: 0 0 8px;
+                    color: #3f2f11;
+                    font-weight: 800;
+                    font-size: 1.9rem;
+                }
+
+                .profile-subtitle {
+                    margin: 0;
+                    color: #7a6640;
+                    line-height: 1.6;
+                }
+
+                .profile-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    gap: 16px;
+                }
+
+                .field-card {
+                    background: #fffdf8;
+                    border: 1px solid rgba(218, 165, 32, 0.14);
+                    border-radius: 22px;
+                    padding: 18px;
+                }
+
+                .field-card.wide {
+                    grid-column: 1 / -1;
+                }
+
+                .field-label {
+                    display: block;
+                    margin-bottom: 10px;
+                    color: #4a3b1a;
+                    font-weight: 700;
+                }
+
+                .field-input,
+                .field-static {
+                    width: 100%;
+                    border-radius: 16px;
+                    padding: 14px 16px;
+                    font-size: 1rem;
+                }
+
+                .field-input {
+                    border: 1px solid rgba(197, 167, 111, 0.44);
+                    background: #fff8ea;
+                    color: #3f2f11;
+                    outline: none;
+                    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+                }
+
+                .field-input:focus {
+                    border-color: rgba(184, 134, 11, 0.6);
+                    box-shadow: 0 0 0 4px rgba(218, 165, 32, 0.12);
+                }
+
+                .field-static {
+                    border: 1px dashed rgba(197, 167, 111, 0.4);
+                    background: rgba(255, 248, 234, 0.85);
+                    color: #6a5427;
+                    font-weight: 600;
+                }
+
+                .field-help {
+                    margin-top: 10px;
+                    color: #8b774f;
+                    font-size: 0.88rem;
+                    line-height: 1.55;
+                }
+
+                .profile-actions {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 14px;
+                    margin-top: 22px;
+                }
+
+                .profile-message {
+                    display: none;
+                    padding: 14px 16px;
+                    border-radius: 18px;
+                    font-weight: 600;
+                    margin-top: 18px;
+                }
+
+                .profile-message.success {
+                    display: block;
+                    background: #edf8ef;
+                    color: #1d6d34;
+                    border: 1px solid rgba(46, 125, 50, 0.16);
+                }
+
+                .profile-message.error {
+                    display: block;
+                    background: #fff1ef;
+                    color: #b42318;
+                    border: 1px solid rgba(220, 53, 69, 0.16);
+                }
+
+                .password-message {
+                    display: none;
+                    padding: 14px 16px;
+                    border-radius: 18px;
+                    font-weight: 600;
+                    margin-top: 18px;
+                }
+
+                .password-message.success {
+                    display: block;
+                    background: #edf8ef;
+                    color: #1d6d34;
+                    border: 1px solid rgba(46, 125, 50, 0.16);
+                }
+
+                .password-message.error {
+                    display: block;
+                    background: #fff1ef;
+                    color: #b42318;
+                    border: 1px solid rgba(220, 53, 69, 0.16);
+                }
+
+                .profile-btn {
+                    border: none;
+                    border-radius: 18px;
+                    padding: 14px 20px;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-weight: 700;
+                    text-decoration: none;
+                }
+
+                .profile-btn.secondary {
+                    background: #efe4cf;
+                    color: #6a4c11;
+                }
+
+                .profile-btn.primary {
+                    background: linear-gradient(145deg, #b8860b, #daa520);
+                    color: white;
+                    box-shadow: 0 18px 32px rgba(184, 134, 11, 0.22);
+                }
+
+                .profile-side-card {
+                    padding: 22px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                }
+
+                .side-badge {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    color: #aa7a0b;
+                    font-size: 0.78rem;
+                    font-weight: 700;
+                    letter-spacing: 0.12em;
+                    text-transform: uppercase;
+                }
+
+                .side-preview {
+                    background: linear-gradient(145deg, #fffdf9, #fff2d7);
+                    border-radius: 24px;
+                    padding: 18px;
+                    border: 1px solid rgba(218, 165, 32, 0.14);
+                }
+
+                .side-avatar {
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 22px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: linear-gradient(145deg, #fff2c9, #f5ddb0);
+                    color: #855400;
+                    font-size: 1.55rem;
+                    font-weight: 800;
+                    margin-bottom: 14px;
+                }
+
+                .side-name {
+                    font-size: 1.3rem;
+                    font-weight: 800;
+                    color: #3f2f11;
+                    margin-bottom: 8px;
+                }
+
+                .side-line {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    color: #6f5b33;
+                    margin-bottom: 10px;
+                    line-height: 1.5;
+                }
+
+                .side-tip {
+                    color: #7b6740;
+                    line-height: 1.65;
+                    font-size: 0.92rem;
+                }
+
+                @media (max-width: 991px) {
+                    .profile-shell {
+                        grid-template-columns: 1fr;
+                    }
+                }
+
+                @media (max-width: 576px) {
+                    .profile-card,
+                    .profile-side-card {
+                        border-radius: 24px;
+                    }
+
+                    .profile-card {
+                        padding: 20px;
+                    }
+
+                    .profile-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .profile-hero,
+                    .profile-actions {
+                        flex-direction: column;
+                        align-items: flex-start;
+                    }
+                }
+            </style>
+
+            <section class="profile-shell">
+                <div class="profile-card">
+                    <div class="profile-hero">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div>
+                            <span class="profile-eyebrow">Admin Account</span>
+                            <h1 class="profile-title">Admin Profile</h1>
+                            <p class="profile-subtitle">এখান থেকে admin নিজের নাম update করতে পারবে। Username, role আর account info নিচে readonly রাখা হয়েছে।</p>
+                        </div>
+                    </div>
+
+                    <form id="adminProfileForm">
+                        <div class="profile-grid">
+                            <div class="field-card wide">
+                                <label class="field-label" for="profileDisplayName">Admin Name</label>
+                                <input class="field-input" id="profileDisplayName" type="text" placeholder="আপনার নাম লিখুন" required />
+                                <div class="field-help">এই নামটা login-এর পরে top badge, profile আর admin identity-তে দেখা যাবে।</div>
+                            </div>
+
+                            <div class="field-card">
+                                <span class="field-label">Username</span>
+                                <div class="field-static" id="profileUsername">admin</div>
+                            </div>
+
+                            <div class="field-card">
+                                <span class="field-label">Role</span>
+                                <div class="field-static" id="profileRole">admin</div>
+                            </div>
+
+                            <div class="field-card">
+                                <span class="field-label">Account Created</span>
+                                <div class="field-static" id="profileCreatedAt">তথ্য লোড হচ্ছে...</div>
+                            </div>
+
+                            <div class="field-card">
+                                <span class="field-label">Last Updated</span>
+                                <div class="field-static" id="profileUpdatedAt">এখনও update হয়নি</div>
+                            </div>
+                        </div>
+
+                        <div id="profileMessage" class="profile-message"></div>
+
+                        <div class="profile-actions">
+                            <a class="profile-btn secondary" href="index.html">
+                                <i class="fas fa-arrow-left"></i>
+                                ড্যাশবোর্ডে ফিরুন
+                            </a>
+                            <button class="profile-btn primary" id="profileSaveButton" type="submit">
+                                <i class="fas fa-floppy-disk"></i>
+                                নাম সেভ করুন
+                            </button>
+                        </div>
+                    </form>
+
+                    <section class="profile-section">
+                        <h2 class="section-title">Password Change</h2>
+                        <p class="section-copy">Admin চাইলে এখান থেকে current password দিয়ে নতুন password set করতে পারবে। নিরাপদ রাখার জন্য confirm password-ও লাগবে।</p>
+
+                        <form id="adminPasswordForm">
+                            <div class="profile-grid">
+                                <div class="field-card wide">
+                                    <label class="field-label" for="currentPassword">Current Password</label>
+                                    <input class="field-input" id="currentPassword" type="password" placeholder="বর্তমান পাসওয়ার্ড দিন" autocomplete="current-password" required />
+                                </div>
+
+                                <div class="field-card">
+                                    <label class="field-label" for="newPassword">New Password</label>
+                                    <input class="field-input" id="newPassword" type="password" placeholder="কমপক্ষে ৮ অক্ষর" autocomplete="new-password" required />
+                                </div>
+
+                                <div class="field-card">
+                                    <label class="field-label" for="confirmPassword">Confirm Password</label>
+                                    <input class="field-input" id="confirmPassword" type="password" placeholder="আবার লিখুন" autocomplete="new-password" required />
+                                </div>
+                            </div>
+
+                            <div id="passwordMessage" class="password-message"></div>
+
+                            <div class="profile-actions">
+                                <div class="field-help" style="margin-top: 0;">Tip: password change হলে পরের login-এ নতুন password use করতে হবে।</div>
+                                <button class="profile-btn primary" id="passwordSaveButton" type="submit">
+                                    <i class="fas fa-key"></i>
+                                    পাসওয়ার্ড সেভ করুন
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+
+                <aside class="profile-side-card">
+                    <div class="side-badge">
+                        <i class="fas fa-gem"></i>
+                        Live Admin Preview
+                    </div>
+                    <div class="side-preview">
+                        <div class="side-avatar" id="profilePreviewAvatar">A</div>
+                        <div class="side-name" id="profilePreviewName">Owner Admin</div>
+                        <div class="side-line">
+                            <i class="fas fa-at"></i>
+                            <span id="profilePreviewUsername">admin</span>
+                        </div>
+                        <div class="side-line">
+                            <i class="fas fa-user-shield"></i>
+                            <span id="profilePreviewRole">admin</span>
+                        </div>
+                    </div>
+                    <div class="side-tip">Name field change করলেই right-side preview instant update হবে। Save করলে backend user profile আর current session দুটোই update হবে।</div>
+                </aside>
+            </section>
+        </main>
+    </div>
+    <script src="assets/js/admin-profile.js"></script>
+</body>
+</html>

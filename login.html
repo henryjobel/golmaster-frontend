@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>লগইন - Gold Business Manager</title>
+    <link rel="stylesheet" href="assets/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="stylesheet" href="assets/common.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/JewelleryManagement.styles.css" />
+    <script src="assets/lib/jquery/dist/jquery.min.js"></script>
+    <script src="assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/site.js"></script>
+</head>
+<body style="min-height: 100vh; background: radial-gradient(circle at top, #fff3d6 0%, #f7f1e3 35%, #efe6d3 100%);">
+    <main class="container" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 32px 16px;">
+        <section style="width: 100%; max-width: 460px; background: rgba(255, 255, 255, 0.92); border-radius: 32px; box-shadow: 0 24px 60px rgba(109, 83, 9, 0.18); overflow: hidden; border: 1px solid rgba(184, 134, 11, 0.12);">
+            <div style="padding: 28px 28px 18px; background: linear-gradient(135deg, #3d2c11, #8c6612 55%, #d6a434); color: white;">
+                <div style="width: 64px; height: 64px; border-radius: 20px; background: rgba(255,255,255,0.14); display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 18px;">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h1 style="font-size: 1.9rem; font-weight: 800; margin: 0 0 8px;">গোল্ড বিজনেস ম্যানেজার</h1>
+                <p style="margin: 0; opacity: 0.92;">Dashboard, customer, stock আর sales control করতে লগইন করুন</p>
+            </div>
+
+            <div style="padding: 28px;">
+                <form id="loginForm">
+                    <div class="mb-3">
+                        <label for="username" class="form-label" style="font-weight: 700; color: #4a3b1a;">ইউজারনেম</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-user" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #b8860b;"></i>
+                            <input id="username" name="username" class="form-control" autocomplete="username" placeholder="admin" style="padding: 14px 14px 14px 46px; border-radius: 18px; border: 2px solid #f0e2bf;" required />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label" style="font-weight: 700; color: #4a3b1a;">পাসওয়ার্ড</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-lock" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #b8860b;"></i>
+                            <input id="password" name="password" type="password" autocomplete="current-password" class="form-control" placeholder="আপনার পাসওয়ার্ড" style="padding: 14px 14px 14px 46px; border-radius: 18px; border: 2px solid #f0e2bf;" required />
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="nextPath" />
+
+                    <button id="loginSubmit" type="submit" class="btn w-100" style="padding: 15px 18px; border-radius: 20px; background: linear-gradient(135deg, #8b6508, #d7a52b); color: white; font-weight: 700; font-size: 1.05rem; border: none; box-shadow: 0 15px 30px rgba(184, 134, 11, 0.24);">
+                        <i class="fas fa-right-to-bracket me-2"></i>
+                        লগইন করুন
+                    </button>
+
+                    <div id="loginFeedback" style="display: none; margin-top: 16px; padding: 12px 14px; border-radius: 16px; font-weight: 600;"></div>
+                </form>
+
+                <div style="margin-top: 22px; padding: 16px 18px; border-radius: 20px; background: #fff8ea; border: 1px dashed rgba(184, 134, 11, 0.4); color: #6d5510;">
+                    <div style="font-weight: 700; margin-bottom: 6px;"><i class="fas fa-key me-2"></i>ডিফল্ট লগইন</div>
+                    <div>ইউজারনেম: <strong>admin</strong></div>
+                    <div>পাসওয়ার্ড: <strong>Admin@123</strong></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="assets/js/login.js"></script>
+</body>
+</html>

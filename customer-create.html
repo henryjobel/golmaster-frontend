@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>নতুন গ্রাহক - Gold Business Manager Preview</title>
+    <link rel="stylesheet" href="assets/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="stylesheet" href="assets/common.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/JewelleryManagement.styles.css" />
+    <script src="assets/lib/jquery/dist/jquery.min.js"></script>
+    <script src="assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/site.js"></script>
+</head>
+<body>
+    <div class="preview-bar">
+        <div class="preview-links">
+            <a class="preview-link" href="index.html">হোম</a>
+<a class="preview-link" href="customer-index.html">গ্রাহক</a>
+<a class="preview-link active" href="customer-create.html">নতুন গ্রাহক</a>
+<a class="preview-link" href="buysell-index.html">ক্রয়</a>
+<a class="preview-link" href="buysell-sell.html">বিক্রয়</a>
+<a class="preview-link" href="sms-index.html">SMS</a>
+<a class="preview-link" href="report-index.html">রিপোর্ট</a>
+<a class="preview-link" href="privacy.html">Privacy</a>
+        </div>
+    </div>
+    <div class="container preview-shell">
+        <main role="main" class="pb-3">
+            <style>
+                .form-container {
+                    background: white;
+                    border-radius: 30px;
+                    padding: 30px;
+                    box-shadow: var(--shadow);
+                    max-width: 600px;
+                    margin: 0 auto;
+                }
+
+                .form-title {
+                    color: #4a3b1a;
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    margin-bottom: 30px;
+                    text-align: center;
+                }
+
+                    .form-title i {
+                        color: #b8860b;
+                        margin-right: 10px;
+                    }
+
+                .form-group {
+                    margin-bottom: 20px;
+                }
+
+                .form-label {
+                    color: #4a3b1a;
+                    font-weight: 600;
+                    margin-bottom: 8px;
+                    display: block;
+                }
+
+                .form-control {
+                    border: 2px solid #f0e8d8;
+                    border-radius: 15px;
+                    padding: 12px 15px;
+                    width: 100%;
+                    transition: all 0.3s ease;
+                }
+
+                    .form-control:focus {
+                        border-color: #b8860b;
+                        outline: none;
+                        box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+                    }
+
+                .btn-submit {
+                    background: linear-gradient(145deg, #b8860b, #daa520);
+                    color: white;
+                    border: none;
+                    padding: 15px 30px;
+                    border-radius: 30px;
+                    font-weight: 600;
+                    width: 100%;
+                    font-size: 1.1rem;
+                    transition: all 0.3s ease;
+                }
+
+                .btn-submit:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 10px 25px rgba(184, 134, 11, 0.3);
+                }
+
+                .btn-submit:disabled {
+                    opacity: 0.75;
+                    cursor: not-allowed;
+                }
+
+                .form-feedback {
+                    margin-top: 16px;
+                    border-radius: 14px;
+                    padding: 12px 15px;
+                    font-weight: 600;
+                    display: none;
+                }
+
+                .form-feedback.success,
+                .form-feedback.error {
+                    display: block;
+                }
+
+                .form-feedback.success {
+                    background: #e8f5e9;
+                    color: #2e7d32;
+                }
+
+                .form-feedback.error {
+                    background: #fdecea;
+                    color: #c62828;
+                }
+            </style>
+
+            <div class="form-container">
+                <h2 class="form-title">
+                    <i class="fas fa-user-plus"></i>
+                    নতুন গ্রাহক যোগ করুন
+                </h2>
+
+                <form id="customerCreateForm">
+                    <div class="form-group">
+                        <label class="form-label" for="customerName">নাম *</label>
+                        <input id="customerName" name="name" class="form-control" placeholder="গ্রাহকের পুরো নাম" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="customerPhone">মোবাইল নম্বর *</label>
+                        <input id="customerPhone" name="phone" class="form-control" placeholder="০১৭১২-৩৪৫৬৭৮" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="customerAddress">ঠিকানা</label>
+                        <textarea id="customerAddress" name="address" class="form-control" rows="3" placeholder="গ্রাহকের ঠিকানা"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="customerStatus">স্ট্যাটাস</label>
+                        <select id="customerStatus" name="status" class="form-control">
+                            <option value="সক্রিয়">সক্রিয়</option>
+                            <option value="নতুন">নতুন</option>
+                            <option value="প্রিমিয়াম">প্রিমিয়াম</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-save me-2"></i>
+                        গ্রাহক সংরক্ষণ করুন
+                    </button>
+
+                    <div id="formFeedback" class="form-feedback"></div>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="assets/js/customer-create.js"></script>
+</body>
+</html>

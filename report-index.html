@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>রিপোর্ট - Gold Business Manager Preview</title>
+    <link rel="stylesheet" href="assets/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="stylesheet" href="assets/common.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/JewelleryManagement.styles.css" />
+    <script src="assets/lib/jquery/dist/jquery.min.js"></script>
+    <script src="assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/site.js"></script>
+</head>
+<body>
+    <div class="preview-bar">
+        <div class="preview-links">
+            <a class="preview-link" href="index.html">হোম</a>
+<a class="preview-link" href="customer-index.html">গ্রাহক</a>
+<a class="preview-link" href="customer-create.html">নতুন গ্রাহক</a>
+<a class="preview-link" href="buysell-index.html">ক্রয়</a>
+<a class="preview-link" href="buysell-sell.html">বিক্রয়</a>
+<a class="preview-link" href="sms-index.html">SMS</a>
+<a class="preview-link active" href="report-index.html">রিপোর্ট</a>
+<a class="preview-link" href="privacy.html">Privacy</a>
+        </div>
+    </div>
+    <div class="container preview-shell">
+        <main role="main" class="pb-3">
+            <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+
+                body {
+                    background: #f8f9fa;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                    padding-bottom: 30px;
+                }
+
+                .mobile-container {
+                    max-width: 500px;
+                    margin: 0 auto;
+                    padding: 16px;
+                    background: #f8f9fa;
+                    min-height: 100vh;
+                }
+
+                /* Header */
+                .app-header {
+                    background: white;
+                    border-radius: 24px;
+                    padding: 16px;
+                    margin-bottom: 16px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+
+                .header-title h1 {
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: #1a1a2e;
+                    margin: 0;
+                }
+
+                .header-title p {
+                    font-size: 12px;
+                    color: #1565c0;
+                    margin: 4px 0 0 0;
+                }
+
+                .header-icon {
+                    width: 48px;
+                    height: 48px;
+                    background: linear-gradient(135deg, #1565c0, #42a5f5);
+                    border-radius: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 24px;
+                }
+
+                /* Tab Navigation */
+                .tab-container {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 8px;
+                    margin-bottom: 16px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                }
+
+                .tab-buttons {
+                    display: flex;
+                    gap: 8px;
+                    overflow-x: auto;
+                    padding-bottom: 4px;
+                }
+
+                .tab-btn {
+                    flex: 1;
+                    min-width: 100px;
+                    padding: 12px 8px;
+                    background: #f5f5f5;
+                    border: none;
+                    border-radius: 16px;
+                    font-size: 13px;
+                    font-weight: 600;
+                    color: #666;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 6px;
+                }
+
+                    .tab-btn i {
+                        font-size: 14px;
+                    }
+
+                    .tab-btn.active {
+                        background: linear-gradient(135deg, #1565c0, #42a5f5);
+                        color: white;
+                    }
+
+                    .tab-btn:active {
+                        transform: scale(0.98);
+                    }
+
+                /* Filter Card */
+                .filter-card {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 16px;
+                    margin-bottom: 16px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                }
+
+                .filter-title {
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #1a1a2e;
+                    margin-bottom: 12px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+
+                    .filter-title i {
+                        color: #1565c0;
+                    }
+
+                .customer-select {
+                    width: 100%;
+                    padding: 14px;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 16px;
+                    font-size: 14px;
+                    margin-bottom: 12px;
+                    font-family: inherit;
+                }
+
+                    .customer-select:focus {
+                        outline: none;
+                        border-color: #1565c0;
+                    }
+
+                /* Summary Cards */
+                .summary-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 12px;
+                    margin-bottom: 16px;
+                }
+
+                .summary-card {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 16px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                    text-align: center;
+                }
+
+                .summary-icon {
+                    width: 48px;
+                    height: 48px;
+                    background: linear-gradient(135deg, #1565c0, #42a5f5);
+                    border-radius: 24px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0 auto 12px;
+                    color: white;
+                    font-size: 20px;
+                }
+
+                .summary-label {
+                    font-size: 12px;
+                    color: #666;
+                    margin-bottom: 6px;
+                }
+
+                .summary-value {
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: #1a1a2e;
+                }
+
+                .summary-sub {
+                    font-size: 11px;
+                    color: #999;
+                    margin-top: 4px;
+                }
+
+                /* Stock Card */
+                .stock-card {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 16px;
+                    margin-bottom: 16px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                }
+
+                .stock-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 12px;
+                }
+
+                .stock-title {
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #1a1a2e;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+
+                .stock-badge {
+                    background: #e8f5e9;
+                    color: #2e7d32;
+                    padding: 4px 10px;
+                    border-radius: 20px;
+                    font-size: 11px;
+                    font-weight: 600;
+                }
+
+                /* Karat Stock Grid */
+                .karat-grid {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 10px;
+                    margin-bottom: 16px;
+                }
+
+                .karat-item {
+                    background: #f8f9fa;
+                    border-radius: 16px;
+                    padding: 12px 8px;
+                    text-align: center;
+                    border: 1px solid #e0e0e0;
+                }
+
+                .karat-name {
+                    font-size: 14px;
+                    font-weight: 700;
+                    color: #1565c0;
+                    margin-bottom: 6px;
+                }
+
+                .karat-weight {
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: #1a1a2e;
+                }
+
+                    .karat-weight small {
+                        font-size: 10px;
+                        font-weight: 400;
+                        color: #999;
+                    }
+
+                /* Brand Stock */
+                .brand-item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 12px 0;
+                    border-bottom: 1px solid #f0f0f0;
+                }
+
+                .brand-name {
+                    font-weight: 600;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+
+                .brand-icon {
+                    width: 36px;
+                    height: 36px;
+                    background: #e3f2fd;
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #1565c0;
+                }
+
+                .brand-stats {
+                    text-align: right;
+                }
+
+                .brand-weight {
+                    font-weight: 700;
+                    color: #1a1a2e;
+                }
+
+                .brand-count {
+                    font-size: 11px;
+                    color: #999;
+                }
+
+                /* Product Table */
+                .product-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+
+                    .product-table th {
+                        text-align: left;
+                        padding: 10px 8px;
+                        background: #f8f9fa;
+                        font-size: 12px;
+                        font-weight: 600;
+                        color: #666;
+                        border-bottom: 2px solid #e0e0e0;
+                    }
+
+                    .product-table td {
+                        padding: 10px 8px;
+                        font-size: 13px;
+                        color: #1a1a2e;
+                        border-bottom: 1px solid #f0f0f0;
+                    }
+
+                /* Transaction Table */
+                .data-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+
+                    .data-table th {
+                        text-align: left;
+                        padding: 12px 8px;
+                        background: #f8f9fa;
+                        font-size: 12px;
+                        font-weight: 600;
+                        color: #666;
+                        border-bottom: 2px solid #e0e0e0;
+                    }
+
+                    .data-table td {
+                        padding: 12px 8px;
+                        font-size: 13px;
+                        color: #1a1a2e;
+                        border-bottom: 1px solid #f0f0f0;
+                    }
+
+                .table-row-total {
+                    background: #f8f9fa;
+                    font-weight: 600;
+                }
+
+                .empty-state {
+                    text-align: center;
+                    padding: 40px 20px;
+                    color: #999;
+                }
+
+                    .empty-state i {
+                        font-size: 48px;
+                        margin-bottom: 12px;
+                        opacity: 0.5;
+                    }
+
+                /* Scrollable */
+                .scrollable-table {
+                    overflow-x: auto;
+                }
+
+                /* Toast */
+                .toast-notification {
+                    position: fixed;
+                    bottom: 20px;
+                    left: 20px;
+                    right: 20px;
+                    background: #1a1a2e;
+                    color: white;
+                    padding: 14px 20px;
+                    border-radius: 30px;
+                    text-align: center;
+                    font-size: 14px;
+                    z-index: 1100;
+                    animation: slideUp 0.3s ease;
+                }
+
+                @keyframes slideUp {
+                    from
+
+                {
+                    transform: translateY(100px);
+                    opacity: 0;
+                }
+
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+
+                }
+
+                .toast-notification.success {
+                    background: #28a745;
+                }
+
+                /* Modal */
+                .modal-custom {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0,0,0,0.5);
+                    z-index: 1000;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 20px;
+                }
+
+                .modal-content-custom {
+                    background: white;
+                    border-radius: 32px;
+                    max-width: 320px;
+                    width: 100%;
+                    text-align: center;
+                    padding: 24px;
+                    animation: modalIn 0.3s ease;
+                }
+
+                @keyframes modalIn {
+                    from
+
+                {
+                    transform: scale(0.9);
+                    opacity: 0;
+                }
+
+                to {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+
+                }
+
+                .modal-btn {
+                    width: 100%;
+                    padding: 14px;
+                    background: linear-gradient(135deg, #1565c0, #42a5f5);
+                    border: none;
+                    border-radius: 30px;
+                    color: white;
+                    font-weight: 600;
+                    cursor: pointer;
+                }
+            </style>
+
+            <div class="mobile-container">
+                <!-- Header -->
+                <div class="app-header">
+                    <div class="header-title">
+                        <h1>রিপোর্ট</h1>
+                        <p>বিশ্লেষণ, স্টোক ও পরিসংখ্যান</p>
+                    </div>
+                    <div class="header-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                </div>
+
+                <!-- Tab Navigation -->
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" onclick="switchTab('customer')">
+                            <i class="fas fa-user"></i> গ্রাহক রিপোর্ট
+                        </button>
+                        <button class="tab-btn" onclick="switchTab('stock')">
+                            <i class="fas fa-boxes"></i> স্টোক রিপোর্ট
+                        </button>
+                        <button class="tab-btn" onclick="switchTab('gold')">
+                            <i class="fas fa-gem"></i> গোল্ড স্টোক
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Customer Report Section -->
+                <div id="customerSection">
+                    <!-- Customer Selection -->
+                    <div class="filter-card">
+                        <div class="filter-title">
+                            <i class="fas fa-user-circle"></i> গ্রাহক নির্বাচন করুন
+                        </div>
+                        <select class="customer-select" id="customerSelect" onchange="loadCustomerReport()">
+                            <option value="">-- গ্রাহক নির্বাচন করুন --</option>
+                        </select>
+                    </div>
+
+                    <!-- Customer Summary Cards -->
+                    <div class="summary-grid" id="customerSummaryGrid">
+                        <div class="summary-card">
+                            <div class="summary-icon"><i class="fas fa-shopping-cart"></i></div>
+                            <div class="summary-label">মোট ক্রয়</div>
+                            <div class="summary-value" id="custTotalPurchase">৳ 0</div>
+                            <div class="summary-sub" id="custPurchaseCount">0 টি লেনদেন</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon"><i class="fas fa-tags"></i></div>
+                            <div class="summary-label">মোট বিক্রয়</div>
+                            <div class="summary-value" id="custTotalSell">৳ 0</div>
+                            <div class="summary-sub" id="custSellCount">0 টি লেনদেন</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon"><i class="fas fa-handshake"></i></div>
+                            <div class="summary-label">নেট লেনদেন</div>
+                            <div class="summary-value" id="custNetAmount">৳ 0</div>
+                            <div class="summary-sub" id="custTransactionCount">0 বার লেনদেন</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon"><i class="fas fa-weight-hanging"></i></div>
+                            <div class="summary-label">মোট সোনা</div>
+                            <div class="summary-value" id="custTotalGold">0 গ্রাম</div>
+                            <div class="summary-sub" id="custTotalVori">0 ভরি</div>
+                        </div>
+                    </div>
+
+                    <!-- Customer Transaction Table -->
+                    <div class="filter-card">
+                        <div class="filter-title">
+                            <i class="fas fa-history"></i> লেনদেনের ইতিহাস
+                        </div>
+                        <div class="scrollable-table">
+                            <table class="data-table" id="customerTransactionTable">
+                                <thead>
+                                    <tr>
+                                        <th>তারিখ</th>
+                                        <th>ধরন</th>
+                                        <th>আইটেম</th>
+                                        <th>কারেট</th>
+                                        <th>ওজন</th>
+                                        <th>মূল্য</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="customerTableBody">
+                                    <tr><td colspan="6" class="empty-state"><i class="fas fa-user"></i><p>গ্রাহক নির্বাচন করুন</p></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stock Report Section (Hidden by default) -->
+                <div id="stockSection" style="display: none;">
+                    <!-- Brand Wise Stock -->
+                    <div class="stock-card">
+                        <div class="stock-header">
+                            <div class="stock-title">
+                                <i class="fas fa-trademark"></i> ব্র্যান্ড ভিত্তিক স্টোক
+                            </div>
+                            <div class="stock-badge"><i class="fas fa-box"></i> মোট পণ্য: <span id="totalBrandProducts">0</span></div>
+                        </div>
+                        <div id="brandStockList"></div>
+                    </div>
+
+                    <!-- Product Wise Stock -->
+                    <div class="stock-card">
+                        <div class="stock-header">
+                            <div class="stock-title">
+                                <i class="fas fa-list-ul"></i> পণ্য ভিত্তিক স্টোক
+                            </div>
+                            <div class="stock-badge"><i class="fas fa-tag"></i> মোট আইটেম: <span id="totalProductItems">0</span></div>
+                        </div>
+                        <div class="scrollable-table">
+                            <table class="product-table" id="productStockTable">
+                                <thead>
+                                    <tr>
+                                        <th>পণ্যের নাম</th>
+                                        <th>ব্র্যান্ড</th>
+                                        <th>কারেট</th>
+                                        <th>পরিমাণ</th>
+                                        <th>ওজন</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productStockBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gold Stock Section (Hidden by default) -->
+                <div id="goldSection" style="display: none;">
+                    <!-- Karat Wise Gold Stock -->
+                    <div class="stock-card">
+                        <div class="stock-header">
+                            <div class="stock-title">
+                                <i class="fas fa-chart-pie"></i> কারেট ভিত্তিক গোল্ড স্টোক
+                            </div>
+                            <div class="stock-badge"><i class="fas fa-weight-hanging"></i> মোট সোনা: <span id="totalGoldWeight">0</span> গ্রাম</div>
+                        </div>
+                        <div class="karat-grid" id="karatStockGrid"></div>
+                    </div>
+
+                    <!-- Gold Purchase History -->
+                    <div class="stock-card">
+                        <div class="stock-header">
+                            <div class="stock-title">
+                                <i class="fas fa-shopping-cart"></i> গোল্ড ক্রয় ইতিহাস
+                            </div>
+                            <div class="stock-badge"><i class="fas fa-calendar"></i> সর্বশেষ ১০টি লেনদেন</div>
+                        </div>
+                        <div class="scrollable-table">
+                            <table class="data-table" id="goldPurchaseTable">
+                                <thead>
+                                    <tr>
+                                        <th>তারিখ</th>
+                                        <th>গ্রাহক/উৎস</th>
+                                        <th>কারেট</th>
+                                        <th>ওজন</th>
+                                        <th>মূল্য</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="goldPurchaseBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="assets/js/report-page.js"></script>
+        </main>
+    </div>
+</body>
+</html>
