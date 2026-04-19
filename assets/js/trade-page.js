@@ -8,8 +8,8 @@
     const VORI_TO_POINT = VORI_TO_RATI * RATI_TO_POINT;
     const pageMode = document.body.dataset.tradeType === "sale" ? "sale" : "purchase";
     const defaultRates = pageMode === "sale"
-        ? { "24K": 6200, "22K": 5950, "21K": 5700, "20K": 5450, "19K": 5200, "18K": 5000, "17K": 4800, "16K": 4600, "15K": 4400, "14K": 4200 }
-        : { "24K": 6100, "22K": 5850, "21K": 5600, "20K": 5350, "19K": 5100, "18K": 4900, "17K": 4700, "16K": 4500, "15K": 4300, "14K": 4100 };
+        ? { "24K": 0, "22K": 0, "21K": 0, "20K": 0, "19K": 0, "18K": 0, "17K": 0, "16K": 0, "15K": 0, "14K": 0 }
+        : { "24K": 0, "22K": 0, "21K": 0, "20K": 0, "19K": 0, "18K": 0, "17K": 0, "16K": 0, "15K": 0, "14K": 0 };
     const labels = pageMode === "sale"
         ? {
             customerPlaceholder: "-- ক্রেতা নির্বাচন করুন --",
@@ -98,10 +98,6 @@
     }
 
     function bindEvents() {
-        if (dom.itemName) {
-            dom.itemName.addEventListener("input", clearItemNameSelect);
-        }
-
         if (dom.karatSelect) {
             dom.karatSelect.addEventListener("change", function () {
                 selectKarat(dom.karatSelect.value);
@@ -123,7 +119,7 @@
             };
         });
 
-        state.selectedKarat = dom.karatSelect ? dom.karatSelect.value || "22K" : "22K";
+        state.selectedKarat = dom.karatSelect ? dom.karatSelect.value || "22K" : state.selectedKarat || "22K";
         renderEditableRateGrid();
         selectKarat(state.selectedKarat);
     }
@@ -143,6 +139,27 @@
         dom.customerSelect.innerHTML = html;
         dom.customerSelect.setAttribute("data-option-count", String(options.length));
         updateCustomerLock();
+    }
+
+    function refreshCustomerSelect2() {
+        if (!dom.customerSelect || !window.jQuery || !window.jQuery.fn || !window.jQuery.fn.select2) {
+            return;
+        }
+
+        const $customerSelect = window.jQuery(dom.customerSelect);
+
+        if (!$customerSelect.hasClass("select2-hidden-accessible")) {
+            $customerSelect.select2({
+                width: "100%",
+                placeholder: labels.customerPlaceholder,
+                allowClear: true,
+                dropdownParent: $customerSelect.closest(".form-card")
+            });
+        }
+
+        $customerSelect
+            .prop("disabled", Boolean(state.lockedCustomerId))
+            .trigger("change.select2");
     }
 
     function getSelectedRateValue(karat) {
@@ -194,6 +211,7 @@
         if (state.lockedCustomerId) {
             dom.customerSelect.value = state.lockedCustomerId;
         }
+        refreshCustomerSelect2();
     }
 
     function getTotalVoriFromInputs() {
@@ -297,7 +315,7 @@
         }
 
         if (item.pointPart > 0) {
-            parts.push(`${item.pointPart} পয়োতি`);
+            parts.push(`${item.pointPart} পয়েন্ট`);
         }
 
         return parts.length ? parts.join(" ") : "0 ভরি";
@@ -339,7 +357,7 @@
                 <div class="item-card">
                     <div class="item-info">
                         <div class="item-name">${window.escapeHtml(item.name)}</div>
-                        <div class="item-details">${window.escapeHtml(item.karat)} | ${window.escapeHtml(formatWeightDisplay(item))} | ${window.escapeHtml(item.brand)}</div>
+                        <div class="item-details">${window.escapeHtml(formatWeightDisplay(item))} | ${window.escapeHtml(item.brand)}</div>
                     </div>
                     <div class="item-price">
                         <div class="item-amount">${window.formatMoney(item.total)}</div>
@@ -478,13 +496,13 @@
 
         if (selectedValue) {
             dom.itemName.value = selectedValue;
+            dom.itemName.focus();
+            dom.itemName.setSelectionRange(dom.itemName.value.length, dom.itemName.value.length);
         }
     };
 
     function clearItemNameSelect() {
-        if (dom.itemNameSelect) {
-            dom.itemNameSelect.value = "";
-        }
+        return;
     }
 
     window.clearItemNameSelect = clearItemNameSelect;
@@ -492,7 +510,9 @@
     window.selectKarat = function (karat) {
         state.selectedKarat = KARAT_OPTIONS.includes(karat) ? karat : "22K";
         state.currentRatePerVori = getSelectedRateValue(state.selectedKarat);
-        dom.karatSelect.value = state.selectedKarat;
+        if (dom.karatSelect) {
+            dom.karatSelect.value = state.selectedKarat;
+        }
         dom.voriRateInput.value = String(Math.round(state.currentRatePerVori));
         renderEditableRateGrid();
         updateAllRateDisplays();
@@ -523,10 +543,6 @@
 
     window.updateRateFromInput = function () {
         const numericRate = Number(dom.voriRateInput.value) || 0;
-
-        if (!numericRate) {
-            return;
-        }
 
         state.currentRatePerVori = numericRate;
         state.rates = state.rates.map(function (rate) {
@@ -559,7 +575,7 @@
     window.addItem = function () {
         const customerId = dom.customerSelect.value;
         const itemName = dom.itemName.value.trim();
-        const karat = dom.karatSelect.value;
+        const karat = state.selectedKarat || "22K";
         const totalPrice = Number(dom.itemTotal.value) || 0;
         const totalVori = Number(dom.totalVoriHidden.value) || 0;
         const gramAmount = totalVori * VORI_TO_GRAM;
@@ -664,6 +680,7 @@
         clearForm();
         if (dom.customerSelect) {
             dom.customerSelect.value = "";
+            updateCustomerLock();
         }
         showToast("success", labels.saveComplete);
     };

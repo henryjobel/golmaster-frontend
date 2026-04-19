@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/JewelleryManagement.styles.css" />
     <script src="assets/lib/jquery/dist/jquery.min.js"></script>
     <script src="assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/site.js"></script>
+    <script src="assets/js/site.js?v=20260418-live-backend"></script>
 </head>
 <body>
     <div class="preview-bar">
@@ -128,90 +128,25 @@
                     font-size: 24px;
                 }
 
-                /* Top Up Card */
-                .topup-card {
-                    background: white;
-                    border-radius: 20px;
-                    padding: 16px;
-                    margin-bottom: 16px;
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-                }
-
-                .topup-title {
-                    font-size: 14px;
-                    font-weight: 600;
-                    color: #1a1a2e;
-                    margin-bottom: 12px;
-                    display: flex;
+                .gateway-status {
+                    display: inline-flex;
                     align-items: center;
-                    gap: 8px;
+                    gap: 7px;
+                    padding: 8px 12px;
+                    border-radius: 14px;
+                    margin: -4px 0 16px;
+                    font-size: 12px;
+                    font-weight: 700;
                 }
 
-                    .topup-title i {
+                    .gateway-status.configured {
+                        background: #e8f5e9;
+                        color: #2e7d32;
+                    }
+
+                    .gateway-status.not-configured {
+                        background: #fff3e0;
                         color: #e65100;
-                    }
-
-                .topup-input-group {
-                    display: flex;
-                    gap: 12px;
-                    margin-bottom: 12px;
-                }
-
-                .topup-input {
-                    flex: 1;
-                    padding: 14px 16px;
-                    border: 1px solid #e0e0e0;
-                    border-radius: 16px;
-                    font-size: 15px;
-                    font-family: inherit;
-                }
-
-                    .topup-input:focus {
-                        outline: none;
-                        border-color: #e65100;
-                        box-shadow: 0 0 0 3px rgba(230, 81, 0, 0.1);
-                    }
-
-                .topup-btn {
-                    padding: 14px 24px;
-                    background: linear-gradient(135deg, #e65100, #ff9800);
-                    border: none;
-                    border-radius: 16px;
-                    color: white;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: all 0.2s;
-                }
-
-                    .topup-btn:active {
-                        transform: scale(0.98);
-                    }
-
-                /* Quick Amounts */
-                .quick-amounts {
-                    display: flex;
-                    gap: 10px;
-                    margin-top: 12px;
-                }
-
-                .quick-btn {
-                    flex: 1;
-                    padding: 10px;
-                    background: #f5f5f5;
-                    border: 1px solid #e0e0e0;
-                    border-radius: 30px;
-                    font-size: 14px;
-                    font-weight: 600;
-                    color: #e65100;
-                    cursor: pointer;
-                    text-align: center;
-                    transition: all 0.2s;
-                }
-
-                    .quick-btn:active {
-                        background: #e65100;
-                        color: white;
-                        transform: scale(0.96);
                     }
 
                 /* Form Card */
@@ -624,23 +559,8 @@
                         <i class="fas fa-comment-dots"></i>
                     </div>
                 </div>
-
-                <!-- Top Up Card -->
-                <div class="topup-card">
-                    <div class="topup-title">
-                        <i class="fas fa-plus-circle"></i>
-                        এসএমএস প্যাকেজ কিনুন
-                    </div>
-                    <div class="topup-input-group">
-                        <input type="number" class="topup-input" id="smsAmount" placeholder="এসএমএস সংখ্যা" value="100">
-                        <button class="topup-btn" onclick="topUpSMS()">কিনুন</button>
-                    </div>
-                    <div class="quick-amounts">
-                        <div class="quick-btn" onclick="setSMSAmount(50)">50 SMS</div>
-                        <div class="quick-btn" onclick="setSMSAmount(100)">100 SMS</div>
-                        <div class="quick-btn" onclick="setSMSAmount(500)">500 SMS</div>
-                        <div class="quick-btn" onclick="setSMSAmount(1000)">1000 SMS</div>
-                    </div>
+                <div class="gateway-status not-configured" id="gatewayStatus">
+                    <i class="fas fa-circle-info"></i> SMS API status লোড হচ্ছে
                 </div>
 
                 <!-- Send SMS Form -->
@@ -717,7 +637,7 @@
                     <button class="modal-btn" onclick="closeModal()">ঠিক আছে</button>
                 </div>
             </div>
-            <script src="assets/js/sms-page.js"></script>
+            <script src="assets/js/sms-page.js?v=20260418-sms-customer-init-fix"></script>
         </main>
     </div>
 </body>

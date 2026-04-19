@@ -286,3 +286,78 @@ body.has-app-chrome {
         border-radius: 12px;
     }
 }
+
+.form-card .select2-container {
+    width: 100% !important;
+    margin-bottom: 16px;
+    font-family: inherit;
+}
+
+.form-card .select2-container--default .select2-selection--single {
+    height: 52px;
+    border: 1px solid #e0e0e0;
+    border-radius: 16px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-card .select2-container--default.select2-container--focus .select2-selection--single,
+.form-card .select2-container--default.select2-container--open .select2-selection--single {
+    border-color: #b8860b;
+    box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+}
+
+.form-card .select2-container--default .select2-selection--single .select2-selection__rendered {
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 42px;
+    color: #1a1a2e;
+    font-size: 15px;
+    line-height: 50px;
+}
+
+.form-card .select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: #666;
+}
+
+.form-card .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 50px;
+    right: 12px;
+}
+
+.form-card .select2-container--default .select2-selection--single .select2-selection__clear {
+    height: 50px;
+    margin-right: 22px;
+    color: #777;
+    font-size: 18px;
+}
+
+.select2-dropdown {
+    border-color: #d8c375;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.14);
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 9px 10px;
+    font-family: inherit;
+    outline: none;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field:focus {
+    border-color: #b8860b;
+}
+
+.select2-results__option {
+    padding: 10px 14px;
+    font-size: 14px;
+}
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: #b8860b;
+}

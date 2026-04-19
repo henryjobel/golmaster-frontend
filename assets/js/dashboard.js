@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const href = this.getAttribute("data-href");
 
             if (apiLink) {
-                window.open(apiLink, "_blank");
+                window.open(`${window.APP_API_BASE_URL}${apiLink.replace(/^\/api/, "")}`, "_blank");
                 return;
             }
 

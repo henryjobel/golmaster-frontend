@@ -17,11 +17,7 @@
         "admin-profile.html": { icon: "fa-user-gear", shortLabel: "প্রোফাইল" }
     };
 
-    if (isFileProtocol) {
-        window.APP_API_BASE_URL = remoteApiBase;
-    } else {
-        window.APP_API_BASE_URL = shouldUseSameOriginApi ? sameOriginApiBase : remoteApiBase;
-    }
+    window.APP_API_BASE_URL = shouldUseSameOriginApi && !isFileProtocol ? sameOriginApiBase : remoteApiBase;
 
     window.appApiFetch = async function (path, options) {
         const requestOptions = Object.assign({}, options);

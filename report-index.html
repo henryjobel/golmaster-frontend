@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/JewelleryManagement.styles.css" />
     <script src="assets/lib/jquery/dist/jquery.min.js"></script>
     <script src="assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/site.js"></script>
+    <script src="assets/js/site.js?v=20260418-live-backend"></script>
 </head>
 <body>
     <div class="preview-bar">
@@ -96,15 +96,14 @@
                 }
 
                 .tab-buttons {
-                    display: flex;
+                    display: grid;
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
                     gap: 8px;
-                    overflow-x: auto;
-                    padding-bottom: 4px;
                 }
 
                 .tab-btn {
-                    flex: 1;
-                    min-width: 100px;
+                    width: 100%;
+                    min-width: 0;
                     padding: 12px 8px;
                     background: #f5f5f5;
                     border: none;
@@ -131,6 +130,14 @@
 
                     .tab-btn:active {
                         transform: scale(0.98);
+                    }
+
+                    .tab-btn:nth-child(4) {
+                        grid-column: 1 / 2;
+                    }
+
+                    .tab-btn:nth-child(5) {
+                        grid-column: 2 / 3;
                     }
 
                 /* Filter Card */
@@ -250,6 +257,10 @@
                     border-radius: 20px;
                     font-size: 11px;
                     font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 4px;
+                    flex-wrap: wrap;
                 }
 
                 /* Karat Stock Grid */
@@ -379,6 +390,54 @@
                     font-weight: 600;
                 }
 
+                .table-pagination {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 10px;
+                    padding: 12px 2px 0;
+                    flex-wrap: wrap;
+                }
+
+                .pagination-info {
+                    font-size: 12px;
+                    color: #777;
+                    font-weight: 500;
+                }
+
+                .pagination-controls {
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                }
+
+                .pagination-btn {
+                    min-width: 34px;
+                    height: 34px;
+                    padding: 0 10px;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 10px;
+                    background: white;
+                    color: #1a1a2e;
+                    font-size: 12px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                }
+
+                    .pagination-btn:hover:not(:disabled),
+                    .pagination-btn.active {
+                        background: #b8860b;
+                        border-color: #b8860b;
+                        color: white;
+                    }
+
+                    .pagination-btn:disabled {
+                        cursor: not-allowed;
+                        color: #bbb;
+                        background: #f8f9fa;
+                    }
+
                 .empty-state {
                     text-align: center;
                     padding: 40px 20px;
@@ -498,14 +557,20 @@
                 <!-- Tab Navigation -->
                 <div class="tab-container">
                     <div class="tab-buttons">
-                        <button class="tab-btn active" onclick="switchTab('customer')">
+                        <button class="tab-btn active" data-report-tab="customer" onclick="switchTab('customer')">
                             <i class="fas fa-user"></i> গ্রাহক রিপোর্ট
                         </button>
-                        <button class="tab-btn" onclick="switchTab('stock')">
+                        <button class="tab-btn" data-report-tab="stock" onclick="switchTab('stock')">
                             <i class="fas fa-boxes"></i> স্টোক রিপোর্ট
                         </button>
-                        <button class="tab-btn" onclick="switchTab('gold')">
+                        <button class="tab-btn" data-report-tab="gold" onclick="switchTab('gold')">
                             <i class="fas fa-gem"></i> গোল্ড স্টোক
+                        </button>
+                        <button class="tab-btn" data-report-tab="profit" onclick="switchTab('profit')">
+                            <i class="fas fa-arrow-trend-up"></i> মোট আয়
+                        </button>
+                        <button class="tab-btn" data-report-tab="loss" onclick="switchTab('loss')">
+                            <i class="fas fa-arrow-trend-down"></i> মোট ক্ষতি
                         </button>
                     </div>
                 </div>
@@ -565,13 +630,15 @@
                                         <th>কারেট</th>
                                         <th>ওজন</th>
                                         <th>মূল্য</th>
+                                        <th>ক্রয়/বিক্রয় ভরি</th>
                                     </tr>
                                 </thead>
                                 <tbody id="customerTableBody">
-                                    <tr><td colspan="6" class="empty-state"><i class="fas fa-user"></i><p>গ্রাহক নির্বাচন করুন</p></td></tr>
+                                    <tr><td colspan="7" class="empty-state"><i class="fas fa-user"></i><p>গ্রাহক নির্বাচন করুন</p></td></tr>
                                 </tbody>
                             </table>
                         </div>
+                        <div class="table-pagination" id="customerTablePagination"></div>
                     </div>
                 </div>
 
@@ -610,6 +677,7 @@
                                 <tbody id="productStockBody"></tbody>
                             </table>
                         </div>
+                        <div class="table-pagination" id="productStockPagination"></div>
                     </div>
                 </div>
 
@@ -621,7 +689,11 @@
                             <div class="stock-title">
                                 <i class="fas fa-chart-pie"></i> কারেট ভিত্তিক গোল্ড স্টোক
                             </div>
-                            <div class="stock-badge"><i class="fas fa-weight-hanging"></i> মোট সোনা: <span id="totalGoldWeight">0</span> গ্রাম</div>
+                            <div class="stock-badge">
+                                <i class="fas fa-weight-hanging"></i>
+                                মোট সোনা: <span id="totalGoldWeight">0</span> গ্রাম
+                                (<span id="totalGoldVori">0</span> ভরি)
+                            </div>
                         </div>
                         <div class="karat-grid" id="karatStockGrid"></div>
                     </div>
@@ -648,10 +720,113 @@
                                 <tbody id="goldPurchaseBody"></tbody>
                             </table>
                         </div>
+                        <div class="table-pagination" id="goldPurchasePagination"></div>
+                    </div>
+                </div>
+
+                <!-- Net Profit Section (Hidden by default) -->
+                <div id="profitSection" style="display: none;">
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <div class="summary-icon"><i class="fas fa-arrow-trend-up"></i></div>
+                            <div class="summary-label">মোট আয়</div>
+                            <div class="summary-value" id="netProfitAmount">৳ 0</div>
+                            <div class="summary-sub" id="netProfitCustomerCount">0 জন গ্রাহক</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon"><i class="fas fa-tags"></i></div>
+                            <div class="summary-label">আয়ের মোট বিক্রয়</div>
+                            <div class="summary-value" id="profitTotalSell">৳ 0</div>
+                            <div class="summary-sub">বিক্রয় - ক্রয়</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon"><i class="fas fa-shopping-cart"></i></div>
+                            <div class="summary-label">আয়ের মোট ক্রয়</div>
+                            <div class="summary-value" id="profitTotalPurchase">৳ 0</div>
+                            <div class="summary-sub">আয় গ্রুপ</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon"><i class="fas fa-receipt"></i></div>
+                            <div class="summary-label">মোট লেনদেন</div>
+                            <div class="summary-value" id="profitTransactionCount">0</div>
+                            <div class="summary-sub">আয় গ্রুপ</div>
+                        </div>
+                    </div>
+
+                    <div class="filter-card">
+                        <div class="filter-title">
+                            <i class="fas fa-list"></i> গ্রাহক ভিত্তিক মোট আয়
+                        </div>
+                        <div class="scrollable-table">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>গ্রাহক</th>
+                                        <th>মোট ক্রয়</th>
+                                        <th>মোট বিক্রয়</th>
+                                        <th>মোট আয়</th>
+                                        <th>লেনদেন</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="profitTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="table-pagination" id="profitTablePagination"></div>
+                    </div>
+                </div>
+
+                <!-- Net Loss Section (Hidden by default) -->
+                <div id="lossSection" style="display: none;">
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <div class="summary-icon"><i class="fas fa-arrow-trend-down"></i></div>
+                            <div class="summary-label">মোট ক্ষতি</div>
+                            <div class="summary-value" id="netLossAmount">৳ 0</div>
+                            <div class="summary-sub" id="netLossCustomerCount">0 জন গ্রাহক</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon"><i class="fas fa-shopping-cart"></i></div>
+                            <div class="summary-label">ক্ষতির মোট ক্রয়</div>
+                            <div class="summary-value" id="lossTotalPurchase">৳ 0</div>
+                            <div class="summary-sub">ক্রয় - বিক্রয়</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon"><i class="fas fa-tags"></i></div>
+                            <div class="summary-label">ক্ষতির মোট বিক্রয়</div>
+                            <div class="summary-value" id="lossTotalSell">৳ 0</div>
+                            <div class="summary-sub">ক্ষতি গ্রুপ</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon"><i class="fas fa-receipt"></i></div>
+                            <div class="summary-label">মোট লেনদেন</div>
+                            <div class="summary-value" id="lossTransactionCount">0</div>
+                            <div class="summary-sub">ক্ষতি গ্রুপ</div>
+                        </div>
+                    </div>
+
+                    <div class="filter-card">
+                        <div class="filter-title">
+                            <i class="fas fa-list"></i> গ্রাহক ভিত্তিক মোট ক্ষতি
+                        </div>
+                        <div class="scrollable-table">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>গ্রাহক</th>
+                                        <th>মোট ক্রয়</th>
+                                        <th>মোট বিক্রয়</th>
+                                        <th>মোট ক্ষতি</th>
+                                        <th>লেনদেন</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="lossTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="table-pagination" id="lossTablePagination"></div>
                     </div>
                 </div>
             </div>
-            <script src="assets/js/report-page.js"></script>
+            <script src="assets/js/report-page.js?v=20260418-total-income-loss"></script>
         </main>
     </div>
 </body>
