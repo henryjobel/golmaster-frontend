@@ -64,6 +64,7 @@
         dom.perPointDisplay = document.getElementById("perPointDisplay");
         dom.voriRateInput = document.getElementById("voriRateInput");
         dom.itemTotalDisplay = document.getElementById("itemTotalDisplay");
+        dom.itemPriceInWords = document.getElementById("itemPriceInWords");
         dom.itemTotal = document.getElementById("itemTotal");
         dom.totalVoriHidden = document.getElementById("totalVoriHidden");
         dom.itemsContainer = document.getElementById("itemsContainer");
@@ -279,6 +280,60 @@
         dom.perPointDisplay.textContent = window.formatMoney(perPoint);
     }
 
+    function numberToBeginningText(num) {
+        const bengaliDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+        const units = ['', 'এক', 'দুই', 'তিন', 'চার', 'পাঁচ', 'ছয়', 'সাত', 'আট', 'নয়'];
+        const teens = ['দশ', 'এগার', 'বার', 'তের', 'চৌদ্দ', 'পনের', 'ষোল', 'সতের', 'আঠার', 'উনিশ'];
+        const tens = ['', '', 'বিশ', 'ত্রিশ', 'চল্লিশ', 'পঞ্চাশ', 'ষাট', 'সত্তর', 'আশি', 'নব্বই'];
+        const scales = [
+            { name: 'কোটি', value: 10000000 },
+            { name: 'লক্ষ', value: 100000 },
+            { name: 'হাজার', value: 1000 },
+            { name: 'শত', value: 100 }
+        ];
+
+        if (num === 0) return 'শূন্য টাকা মাত্র';
+
+        let result = '';
+
+        for (let scale of scales) {
+            if (num >= scale.value) {
+                const quotient = Math.floor(num / scale.value);
+                const remainder = num % scale.value;
+                
+                if (quotient > 0) {
+                    if (quotient < 10) {
+                        result += units[quotient] + ' ';
+                    } else if (quotient < 20) {
+                        result += teens[quotient - 10] + ' ';
+                    } else {
+                        const ten = Math.floor(quotient / 10);
+                        const one = quotient % 10;
+                        result += tens[ten] + (one > 0 ? ' ' + units[one] : '') + ' ';
+                    }
+                    result += scale.name + ' ';
+                }
+                
+                num = remainder;
+            }
+        }
+
+        // Handle remaining ones, tens
+        if (num > 0) {
+            if (num < 10) {
+                result += units[num] + ' ';
+            } else if (num < 20) {
+                result += teens[num - 10] + ' ';
+            } else {
+                const ten = Math.floor(num / 10);
+                const one = num % 10;
+                result += tens[ten] + (one > 0 ? ' ' + units[one] : '') + ' ';
+            }
+        }
+
+        return result.trim() + ' টাকা মাত্র';
+    }
+
     function calculateTotalPriceFromWeight() {
         const totalVori = getTotalVoriFromInputs();
         const gram = totalVori * VORI_TO_GRAM;
@@ -289,6 +344,11 @@
             minimumFractionDigits: 0,
             maximumFractionDigits: 3
         });
+
+        if (dom.itemPriceInWords) {
+            dom.itemPriceInWords.textContent = numberToBeginningText(Math.round(totalPrice || 0));
+        }
+        
         dom.itemTotal.value = String(totalPrice);
         dom.totalVoriHidden.value = String(totalVori);
 

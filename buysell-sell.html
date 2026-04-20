@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/css/site.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
     <link rel="stylesheet" href="assets/common.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="assets/JewelleryManagement.styles.css" />
     <script src="assets/lib/jquery/dist/jquery.min.js"></script>
@@ -219,6 +220,8 @@
                 /* Input Group */
                 .input-group {
                     margin-bottom: 16px;
+                    display: block;
+                    width: 100%;
                 }
 
                 .input-label {
@@ -227,6 +230,7 @@
                     margin-bottom: 8px;
                     display: block;
                     font-weight: 500;
+                    line-height: 1.35;
                 }
 
                 .input-field {
@@ -392,24 +396,29 @@
                 .editable-rate {
                     display: flex;
                     align-items: center;
-                    gap: 12px;
+                    gap: 10px;
                     background: #f8f9fa;
                     border-radius: 16px;
-                    padding: 8px 16px;
+                    padding: 12px 14px;
+                    overflow: hidden;
+                    min-width: 0;
+                    width: 100%;
                 }
 
                     .editable-rate span {
                         color: #b8860b;
                         font-weight: 600;
                         font-size: 18px;
+                        flex-shrink: 0;
                     }
 
                     .editable-rate input {
                         flex: 1;
+                        min-width: 0;
                         padding: 10px;
                         border: 1px solid #e0e0e0;
                         border-radius: 14px;
-                        font-size: 18px;
+                        font-size: 16px;
                         font-weight: 700;
                         text-align: right;
                         background: white;
@@ -419,8 +428,52 @@
                     .editable-rate .rate-unit {
                         color: #666;
                         font-size: 14px;
-                        min-width: 45px;
+                        flex-shrink: 0;
+                        white-space: nowrap;
                     }
+
+                /* Item Total */
+                .price-total-card {
+                    width: 100%;
+                    min-height: 86px;
+                    background: linear-gradient(135deg, #fffaf0, #fff4e2);
+                    border: 1px solid #f5dfae;
+                    border-radius: 16px;
+                    padding: 18px 20px;
+                    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+                }
+
+                .price-total-line {
+                    display: flex;
+                    align-items: baseline;
+                    gap: 10px;
+                    min-width: 0;
+                }
+
+                .price-total-symbol {
+                    color: #b8860b;
+                    font-size: 18px;
+                    font-weight: 700;
+                    flex-shrink: 0;
+                }
+
+                .price-total-amount {
+                    min-width: 0;
+                    color: #a87902;
+                    font-size: 28px;
+                    font-weight: 800;
+                    font-variant-numeric: tabular-nums;
+                    line-height: 1.05;
+                    overflow-wrap: anywhere;
+                }
+
+                .price-total-words {
+                    margin-top: 8px;
+                    color: #6f6250;
+                    font-size: 14px;
+                    font-weight: 600;
+                    line-height: 1.35;
+                }
 
                 /* Add Button */
                 .add-btn {
@@ -710,6 +763,436 @@
                 .toast-notification.error {
                     background: #dc3545;
                 }
+
+                /* ============================================
+                   RESPONSIVE DESIGN - Mobile & Tablet
+                   ============================================ */
+
+                /* Extra Small Phones (< 360px) */
+                @media (max-width: 359px) {
+                    .mobile-container {
+                        padding: 12px;
+                    }
+
+                    .app-header {
+                        padding: 12px;
+                        border-radius: 16px;
+                        margin-bottom: 12px;
+                    }
+
+                    .header-title h1 {
+                        font-size: 18px;
+                    }
+
+                    .header-icon {
+                        width: 40px;
+                        height: 40px;
+                        font-size: 20px;
+                    }
+
+                    .rate-grid {
+                        grid-template-columns: repeat(4, 1fr);
+                    }
+
+                    .weight-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+
+                    .rate-cards {
+                        display: grid;
+                        grid-template-columns: repeat(2, minmax(0, 1fr));
+                        gap: 8px;
+                    }
+
+                    .form-card,
+                    .gold-rate-card {
+                        padding: 14px;
+                    }
+
+                    .section-title {
+                        font-size: 14px;
+                        margin-bottom: 12px;
+                    }
+
+                    .weight-calculator {
+                        padding: 14px;
+                    }
+
+                    #itemTotalDisplay {
+                        font-size: 24px;
+                    }
+
+                    .price-total-card {
+                        min-height: 76px;
+                        padding: 14px 16px;
+                    }
+
+                    .price-total-words {
+                        font-size: 12px;
+                    }
+
+                    .summary-label,
+                    .summary-value {
+                        font-size: 12px;
+                    }
+
+                    .grand-total .summary-label {
+                        font-size: 14px;
+                    }
+
+                    .grand-total .summary-value {
+                        font-size: 16px;
+                    }
+                }
+
+                /* Small Phones (360px - 480px) */
+                @media (min-width: 360px) and (max-width: 480px) {
+                    .mobile-container {
+                        padding: 14px;
+                    }
+
+                    .rate-grid {
+                        grid-template-columns: repeat(5, 1fr);
+                    }
+
+                    .weight-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+
+                    .rate-cards {
+                        display: grid;
+                        grid-template-columns: repeat(2, minmax(0, 1fr));
+                        gap: 10px;
+                    }
+
+                    #itemTotalDisplay {
+                        font-size: 26px;
+                    }
+
+                    .price-total-card {
+                        padding: 16px 18px;
+                    }
+
+                    .price-total-words {
+                        font-size: 13px;
+                    }
+
+                    .custom-select,
+                    .input-field {
+                        font-size: 14px;
+                        padding: 12px 14px;
+                    }
+
+                    .weight-label {
+                        font-size: 12px;
+                    }
+
+                    .weight-input {
+                        font-size: 16px;
+                    }
+
+                    .editable-rate {
+                        padding: 10px 12px;
+                        gap: 8px;
+                    }
+
+                    .editable-rate input {
+                        font-size: 15px;
+                        padding: 8px;
+                    }
+
+                    .editable-rate span {
+                        font-size: 16px;
+                    }
+
+                    .editable-rate .rate-unit {
+                        font-size: 12px;
+                        min-width: auto;
+                    }
+
+                    .item-card {
+                        padding: 12px;
+                    }
+
+                    .delete-item {
+                        width: 32px;
+                        height: 32px;
+                    }
+                }
+
+                /* Medium Phones (480px - 600px) */
+                @media (min-width: 480px) and (max-width: 600px) {
+                    .mobile-container {
+                        padding: 16px;
+                    }
+
+                    .rate-grid {
+                        grid-template-columns: repeat(5, 1fr);
+                    }
+
+                    .weight-grid {
+                        grid-template-columns: repeat(4, 1fr);
+                    }
+
+                    .rate-cards {
+                        display: flex;
+                        flex-direction: row;
+                        gap: 10px;
+                    }
+
+                    #itemTotalDisplay {
+                        font-size: 28px;
+                    }
+
+                    .rate-card-value {
+                        font-size: 14px;
+                    }
+
+                    .item-card {
+                        padding: 14px;
+                    }
+                }
+
+                /* Tablets & Large Screens (600px+) */
+                @media (min-width: 600px) {
+                    .mobile-container {
+                        max-width: 600px;
+                        padding: 20px;
+                    }
+
+                    .app-header {
+                        padding: 20px;
+                        border-radius: 28px;
+                        margin-bottom: 20px;
+                    }
+
+                    .header-title h1 {
+                        font-size: 24px;
+                    }
+
+                    .header-icon {
+                        width: 56px;
+                        height: 56px;
+                        font-size: 28px;
+                    }
+
+                    .rate-grid {
+                        grid-template-columns: repeat(5, 1fr);
+                    }
+
+                    .weight-grid {
+                        grid-template-columns: repeat(4, 1fr);
+                    }
+
+                    .rate-cards {
+                        display: flex;
+                        flex-direction: row;
+                        gap: 14px;
+                    }
+
+                    .form-card,
+                    .gold-rate-card,
+                    .items-list,
+                    .footer-summary {
+                        padding: 24px;
+                        border-radius: 28px;
+                    }
+
+                    .gold-rate-card {
+                        padding: 20px;
+                    }
+
+                    #itemTotalDisplay {
+                        font-size: 30px;
+                    }
+
+                    .custom-select,
+                    .input-field {
+                        font-size: 15px;
+                        padding: 16px;
+                        border-radius: 18px;
+                    }
+
+                    .weight-label {
+                        font-size: 14px;
+                    }
+
+                    .weight-input {
+                        font-size: 20px;
+                    }
+
+                    .editable-rate {
+                        padding: 12px 20px;
+                    }
+
+                    .editable-rate input {
+                        font-size: 20px;
+                        padding: 12px;
+                    }
+
+                    .rate-card {
+                        padding: 16px 12px;
+                    }
+
+                    .rate-card-value {
+                        font-size: 18px;
+                    }
+
+                    .item-card {
+                        padding: 16px;
+                    }
+
+                    .item-name {
+                        font-size: 16px;
+                    }
+
+                    .item-amount {
+                        font-size: 18px;
+                    }
+
+                    .summary-label {
+                        font-size: 15px;
+                    }
+
+                    .summary-value {
+                        font-size: 15px;
+                    }
+
+                    .grand-total .summary-label {
+                        font-size: 18px;
+                    }
+
+                    .grand-total .summary-value {
+                        font-size: 24px;
+                    }
+
+                    .btn-clear,
+                    .btn-save {
+                        padding: 16px;
+                        font-size: 15px;
+                    }
+                }
+
+                /* Large Tablets & Desktops (800px+) */
+                @media (min-width: 800px) {
+                    .mobile-container {
+                        max-width: 700px;
+                    }
+
+                    .header-title h1 {
+                        font-size: 28px;
+                    }
+
+                    .weight-item {
+                        padding: 16px 12px;
+                    }
+
+                    .weight-label {
+                        font-size: 15px;
+                    }
+
+                    .weight-input {
+                        font-size: 22px;
+                    }
+
+                    .form-card,
+                    .gold-rate-card,
+                    .items-list,
+                    .footer-summary {
+                        padding: 28px;
+                    }
+
+                    #itemTotalDisplay {
+                        font-size: 32px;
+                    }
+
+                    .add-btn {
+                        padding: 18px;
+                        font-size: 17px;
+                        border-radius: 32px;
+                    }
+
+                    .btn-clear,
+                    .btn-save {
+                        padding: 18px;
+                        font-size: 16px;
+                    }
+                }
+
+                /* Touch-friendly improvements */
+                @media (hover: none) and (pointer: coarse) {
+                    .rate-item,
+                    .weight-item,
+                    .item-card,
+                    .add-btn,
+                    .btn-clear,
+                    .btn-save,
+                    .delete-item,
+                    .modal-btn {
+                        min-height: 44px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                    .custom-select,
+                    .input-field {
+                        min-height: 48px;
+                        padding: 12px 16px;
+                    }
+                }
+
+                /* Orientation adjustments */
+                @media (orientation: landscape) and (max-height: 500px) {
+                    .mobile-container {
+                        min-height: auto;
+                        padding: 12px;
+                    }
+
+                    .app-header,
+                    .form-card,
+                    .gold-rate-card {
+                        margin-bottom: 10px;
+                    }
+
+                    .weight-calculator {
+                        padding: 12px;
+                        margin-bottom: 12px;
+                    }
+
+                    .rate-cards {
+                        gap: 8px;
+                    }
+
+                    .rate-card {
+                        padding: 10px 6px;
+                    }
+
+                    .rate-card-title {
+                        font-size: 10px;
+                    }
+
+                    .rate-card-value {
+                        font-size: 14px;
+                    }
+
+                    .rate-card-sub {
+                        font-size: 8px;
+                    }
+
+                    .footer-summary {
+                        padding: 12px;
+                    }
+
+                    .summary-row {
+                        margin-bottom: 6px;
+                    }
+
+                    .action-buttons {
+                        gap: 8px;
+                        margin-top: 8px;
+                    }
+                }
             </style>
 
             <div class="mobile-container">
@@ -841,9 +1324,12 @@
                     <!-- Total Price -->
                     <div class="input-group">
                         <label class="input-label">এই আইটেমের মূল্য</label>
-                        <div style="background: linear-gradient(135deg, #e8f5e9, #f1f8e9); border-radius: 16px; padding: 14px 16px;">
-                            <span style="color: #2e7d32; font-weight: 600;">৳</span>
-                            <span id="itemTotalDisplay" style="font-size: 22px; font-weight: 800; color: #2e7d32;">0</span>
+                        <div class="price-total-card">
+                            <div class="price-total-line">
+                                <span class="price-total-symbol">৳</span>
+                                <span class="price-total-amount" id="itemTotalDisplay" aria-live="polite">0</span>
+                            </div>
+                            <div class="price-total-words" id="itemPriceInWords">শূন্য টাকা মাত্র</div>
                         </div>
                         <input type="hidden" id="itemTotal">
                         <input type="hidden" id="totalVoriHidden" value="0">

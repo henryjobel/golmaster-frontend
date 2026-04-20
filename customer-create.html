@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="assets/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/site.css" />
     <link rel="stylesheet" href="assets/common.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="assets/JewelleryManagement.styles.css" />
     <script src="assets/lib/jquery/dist/jquery.min.js"></script>
@@ -119,6 +120,244 @@
                 .form-feedback.error {
                     background: #fdecea;
                     color: #c62828;
+                }
+
+                /* ============================================
+                   RESPONSIVE DESIGN - Customer Create Form
+                   ============================================ */
+
+                /* Extra Small Phones (< 360px) */
+                @media (max-width: 359px) {
+                    .form-container {
+                        padding: 20px;
+                        border-radius: 20px;
+                    }
+
+                    .form-title {
+                        font-size: 1.4rem;
+                        margin-bottom: 20px;
+                    }
+
+                    .form-group {
+                        margin-bottom: 16px;
+                    }
+
+                    .form-label {
+                        font-size: 12px;
+                    }
+
+                    .form-control {
+                        padding: 10px 12px;
+                        font-size: 12px;
+                    }
+
+                    .btn-submit {
+                        padding: 12px 18px;
+                        font-size: 13px;
+                    }
+                }
+
+                /* Small Phones (360px - 480px) */
+                @media (min-width: 360px) and (max-width: 480px) {
+                    .form-container {
+                        max-width: 100%;
+                        padding: 22px;
+                        border-radius: 22px;
+                    }
+
+                    .form-title {
+                        font-size: 1.5rem;
+                        margin-bottom: 22px;
+                    }
+
+                    .form-group {
+                        margin-bottom: 18px;
+                    }
+
+                    .form-label {
+                        font-size: 13px;
+                        margin-bottom: 8px;
+                    }
+
+                    .form-control {
+                        padding: 12px 14px;
+                        font-size: 13px;
+                        min-height: 44px;
+                    }
+
+                    .btn-submit {
+                        padding: 13px 20px;
+                        font-size: 14px;
+                        min-height: 44px;
+                    }
+
+                    textarea.form-control {
+                        min-height: 100px;
+                    }
+                }
+
+                /* Medium Phones (480px - 600px) */
+                @media (min-width: 480px) and (max-width: 600px) {
+                    .form-container {
+                        max-width: 500px;
+                        margin: 0 auto;
+                        padding: 26px;
+                        border-radius: 24px;
+                    }
+
+                    .form-title {
+                        font-size: 1.6rem;
+                        margin-bottom: 24px;
+                    }
+
+                    .form-group {
+                        margin-bottom: 20px;
+                    }
+
+                    .form-label {
+                        font-size: 14px;
+                    }
+
+                    .form-control {
+                        padding: 13px 15px;
+                        font-size: 14px;
+                        min-height: 46px;
+                    }
+
+                    .btn-submit {
+                        padding: 14px 22px;
+                        font-size: 15px;
+                        min-height: 46px;
+                    }
+
+                    textarea.form-control {
+                        min-height: 120px;
+                    }
+                }
+
+                /* Tablets (600px+) */
+                @media (min-width: 600px) {
+                    .form-container {
+                        max-width: 600px;
+                        margin: 0 auto;
+                        padding: 30px;
+                        border-radius: 30px;
+                    }
+
+                    .form-title {
+                        font-size: 1.8rem;
+                        margin-bottom: 30px;
+                    }
+
+                    .form-group {
+                        margin-bottom: 20px;
+                    }
+
+                    .form-label {
+                        font-size: 14px;
+                        margin-bottom: 8px;
+                    }
+
+                    .form-control {
+                        padding: 14px 16px;
+                        font-size: 15px;
+                        min-height: 48px;
+                    }
+
+                    .btn-submit {
+                        padding: 15px 24px;
+                        font-size: 16px;
+                        min-height: 48px;
+                    }
+
+                    textarea.form-control {
+                        min-height: 120px;
+                    }
+                }
+
+                /* Large Tablets & Desktops (800px+) */
+                @media (min-width: 800px) {
+                    .form-container {
+                        max-width: 700px;
+                        padding: 40px;
+                        border-radius: 32px;
+                    }
+
+                    .form-title {
+                        font-size: 2rem;
+                        margin-bottom: 32px;
+                    }
+
+                    .form-group {
+                        margin-bottom: 24px;
+                    }
+
+                    .form-control {
+                        padding: 15px 18px;
+                        font-size: 15px;
+                        min-height: 50px;
+                    }
+
+                    .btn-submit {
+                        padding: 16px 28px;
+                        font-size: 17px;
+                        min-height: 50px;
+                    }
+
+                    textarea.form-control {
+                        min-height: 140px;
+                    }
+                }
+
+                /* Touch-friendly improvements */
+                @media (hover: none) and (pointer: coarse) {
+                    .form-control,
+                    .btn-submit {
+                        min-height: 44px;
+                    }
+
+                    input[type="checkbox"],
+                    input[type="radio"] {
+                        width: 20px;
+                        height: 20px;
+                        cursor: pointer;
+                    }
+
+                    label {
+                        cursor: pointer;
+                    }
+                }
+
+                /* Landscape orientation */
+                @media (orientation: landscape) and (max-height: 600px) {
+                    .form-container {
+                        padding: 16px;
+                    }
+
+                    .form-title {
+                        font-size: 1.2rem;
+                        margin-bottom: 12px;
+                    }
+
+                    .form-group {
+                        margin-bottom: 12px;
+                    }
+
+                    .form-control {
+                        padding: 10px 12px;
+                        font-size: 13px;
+                        min-height: 40px;
+                    }
+
+                    .btn-submit {
+                        padding: 10px 16px;
+                        font-size: 14px;
+                        min-height: 40px;
+                    }
+
+                    textarea.form-control {
+                        min-height: 80px;
+                    }
                 }
             </style>
 
